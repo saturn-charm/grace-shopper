@@ -1,4 +1,4 @@
-const {db} = require('./server/db')
+const db = require('./server/db')
 // const {green, red} = require('chalk')
 
 const User = require('./server/db/models/user')
@@ -55,17 +55,17 @@ const seed = async () => {
     User.create({
       name: 'user1',
       email: 'babyteeth@hmail.com',
-      password: 12345
+      password: '12345'
     }),
     User.create({
       name: 'user2',
       email: 'babyteeth@hmail.com',
-      password: 123
+      password: '123'
     }),
     User.create({
       name: 'user3',
       email: 'babyteeth@hmail.com',
-      password: 1234
+      password: '1234'
     })
   ])
   console.log('Seeding success!')
