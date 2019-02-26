@@ -18,7 +18,7 @@ const ItemInOrder = require('./item_in_order')
  */
 
 // Associations
-Product.belongsToMany(Cart, { through: ItemInOrder })
+Product.belongsToMany(Order, { through: ItemInOrder })
 Cart.belongsToMany(Product, { through: ItemInOrder })
 User.hasMany(Order)
 
