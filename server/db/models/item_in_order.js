@@ -9,3 +9,5 @@ const ItemInOrder = db.define('item-in-order', {
     type: Sequelize.DECIMAL
   }
 })
+
+module.exports = ItemInOrder

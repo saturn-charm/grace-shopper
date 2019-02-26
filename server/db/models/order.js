@@ -7,3 +7,5 @@ const Order = db.define('order', {
     defaultValue: false
   }
 })
+
+module.exports = Order

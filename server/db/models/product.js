@@ -11,7 +11,8 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://thumbs.dreamstime.com/z/dog-s-shoe-tripping-untied-35441924.jpg',
+    defaultValue:
+      'https://thumbs.dreamstime.com/z/dog-s-shoe-tripping-untied-35441924.jpg',
     validate: {
       isUrl: true
     },
@@ -31,3 +32,5 @@ const Product = db.define('product', {
     }
   }
 })
+
+module.exports = Product
