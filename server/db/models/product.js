@@ -15,21 +15,21 @@ const Product = db.define('product', {
       'https://thumbs.dreamstime.com/z/dog-s-shoe-tripping-untied-35441924.jpg',
     validate: {
       isUrl: true
-    },
-    stock: {
-      type: Sequelize.SMALLINT,
-      validate: {
-        min: 0
-      },
-      defaultValue: 1
-    },
-    price: {
-      type: Sequelize.DECIMAL,
-      validate: {
-        min: 0
-      },
-      allowNull: false
     }
+  },
+  stock: {
+    type: Sequelize.SMALLINT,
+    validate: {
+      min: 0
+    },
+    defaultValue: 1
+  },
+  price: {
+    type: Sequelize.DECIMAL,
+    validate: {
+      min: 0
+    },
+    allowNull: false
   }
 })
 

@@ -5,7 +5,8 @@ const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
 
 const seed = async () => {
-  await db.sync({force: false})
+  await db.sync({force: true})
+  //for production, change to false
 
   const [
     fallMittens,
@@ -54,17 +55,17 @@ const seed = async () => {
   const [user1, user2, user3] = await Promise.all([
     User.create({
       name: 'user1',
-      email: 'babyteeth@hmail.com',
+      email: 'babyteeth1@hmail.com',
       password: '12345'
     }),
     User.create({
       name: 'user2',
-      email: 'babyteeth@hmail.com',
+      email: 'babyteeth2@hmail.com',
       password: '123'
     }),
     User.create({
       name: 'user3',
-      email: 'babyteeth@hmail.com',
+      email: 'babyteeth3@hmail.com',
       password: '1234'
     })
   ])
