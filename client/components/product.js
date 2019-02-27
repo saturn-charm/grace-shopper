@@ -5,7 +5,12 @@ export default function Product(props) {
 
   return (
     <div className="listed-product">
-      <img className="listed-product-image" src={product.imageUrl} />
+      <img
+        className="listed-product-image"
+        src={product.imageUrl}
+        height="100"
+        width="100"
+      />
       <div className="listed-product-text">
         <p className="listed-product-name">{product.name}</p>
         <p className="listed-product-price">{product.price}</p>

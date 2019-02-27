@@ -1,6 +1,11 @@
 import axios from 'axios'
 import history from '../history'
 
+// INITIAL STATE
+const initialState = {
+  products: []
+}
+
 // ACTION TYPES
 const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
 
@@ -11,7 +16,7 @@ const getProductsFromServer = products => ({
 })
 
 // THUNK CREATORS
-const getProductsThunk = () => {
+export const getProductsThunk = () => {
   return async dispatch => {
     try {
       const response = await axios.get('/api/products')
@@ -23,16 +28,12 @@ const getProductsThunk = () => {
   }
 }
 
-// INITIAL STATE
-const initialState = {
-  products: []
-}
-
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_PRODUCTS_FROM_SERVER:
+    case GET_PRODUCTS_FROM_SERVER: {
       return {...state, products: action.products}
+    }
     default:
       return state
   }

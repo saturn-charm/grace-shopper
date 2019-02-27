@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/product'
+import Product from './product'
 
 class AllProducts extends Component {
   constructor(props) {
@@ -8,14 +9,19 @@ class AllProducts extends Component {
   }
 
   async componentDidMount() {
-    await getProductsThunkDispatch()
+    console.log('inside componentdidmount of all-products')
+    await this.props.getProductsThunkDispatch()
   }
 
   render() {
     return (
       <div id="all-products">
         <p>All Products</p>
-        {this.props.products.map(product => <Product product={product} />)}
+        {this.props.products.map(product => (
+          <div key={product.id}>
+            <Product product={product} />
+          </div>
+        ))}
       </div>
     )
   }
@@ -25,9 +31,8 @@ const mapStateToProps = state => ({
   products: state.product.products
 })
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = dispatch => ({
   getProductsThunkDispatch: () => dispatch(getProductsThunk())
 })
 
-connect(mapStateToProps, mapDispatchToProps)(AllProducts)
-export default connect
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
