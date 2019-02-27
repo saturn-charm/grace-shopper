@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/product'
 import Product from './product'
+import {Link} from 'react-router-dom'
 
 class AllProducts extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class AllProducts extends Component {
   }
 
   async componentDidMount() {
-    console.log('inside componentdidmount of all-products')
     await this.props.getProductsThunkDispatch()
   }
 
@@ -19,7 +19,9 @@ class AllProducts extends Component {
         <p>All Products</p>
         {this.props.products.map(product => (
           <div key={product.id}>
-            <Product product={product} />
+            <Link to={`/products/` + product.id}>
+              <Product product={product} />
+            </Link>
           </div>
         ))}
       </div>
