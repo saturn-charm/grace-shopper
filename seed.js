@@ -1,13 +1,10 @@
-const db = require('./server/db')
-// const {green, red} = require('chalk')
+const db = require('./server/db/db')
 
 const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
 
 const seed = async () => {
   await db.sync({force: true})
-  //for production, change to false
-
   const [
     fallMittens,
     summerMittens,
