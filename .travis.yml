@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "saturn-charm-gshopper-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: puppermittens # see README
+  api_key:
+    secure: c9cfHU1gBJIKfT4KcoMXs+TzFRZYsTFFqBaAvuiZ+Xv/JzC9AGBhaW7MckBV/gcL4ZVeSaEHqi16Tt8XTY35TCYsbS7B3agHu8SjFtE3u2cj0sCCUMnkoiOjiaVNB81DU78Jl72o6S1oDgcdzDB/3OvUKy9viUeBS6guWU5pZIFEwpNnMJYXrtQs6oC3hQPF8O9SjIt97k8/QwF9GI1WxY2f6mQa4Ew6rWk//HkYQ4GZBPh9FnY1KokUPmndN83vtzMb77dqwscquZoqbo/gFzfYp5IX00Wj37Vs5l4xxtE+IVxrNchfsPATju9pVPPRKCCJGKShvEBr40sdEi6FTl9Ll5jLfDKLmW57xnEc/7Ff0SkxrH2F67z1qkHxYAvcqNvzGF4hmKcLMVhkOEh0l/eBEUuYBJ0WCNox2S16CDxDlfcqhskfcK/je4o7rPeIfoLQiWseg8CBZP+gRec3ANR2y4T+7YY08091+to7Vn5suS4Y7ES0E9nrttLOKTWOxHiI+bG/HmqJysDIdd4t7phnypeF0fMpiMvdebWKs2Evbqliz6ZFW1IoR24Rxp7CIqkdOTciAh9zrYaHx+Ran7VAKkMlr1Pu0491bXO71w3D0PevRH7zr+hAfhkSvZVD8WyBgjoKnfmQLwB51ChUjOu5AWCiWZYkvq3JlGM1imk= # see README

@@ -1,12 +1,10 @@
 const db = require('./server/db/db')
-// const {green, red} = require('chalk')
 
 const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
 
 const seed = async () => {
   await db.sync({force: true})
-
   const [
     fallMittens,
     summerMittens,
@@ -53,18 +51,18 @@ const seed = async () => {
 
   const [user1, user2, user3] = await Promise.all([
     User.create({
-      name: '1user1',
-      email: '1babyteeth@hmail.com',
+      name: 'user1',
+      email: 'babyteeth1@hmail.com',
       password: '12345'
     }),
     User.create({
-      name: '2user2',
-      email: '2babyteeth@hmail.com',
+      name: 'user2',
+      email: 'babyteeth2@hmail.com',
       password: '123'
     }),
     User.create({
-      name: '3user3',
-      email: '3babyteeth@hmail.com',
+      name: 'user3',
+      email: 'babyteeth3@hmail.com',
       password: '1234'
     })
   ])
