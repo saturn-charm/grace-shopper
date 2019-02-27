@@ -31,7 +31,8 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
-  }
+  },
+  googleId: Sequelize.STRING
 })
 
 module.exports = User
