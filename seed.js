@@ -1,11 +1,11 @@
-const {db} = require('./server/db')
+const db = require('./server/db/db')
 // const {green, red} = require('chalk')
 
 const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
 
 const seed = async () => {
-  await db.sync({force: false})
+  await db.sync({force: true})
 
   const [
     fallMittens,
@@ -53,19 +53,19 @@ const seed = async () => {
 
   const [user1, user2, user3] = await Promise.all([
     User.create({
-      name: 'user1',
-      email: 'babyteeth@hmail.com',
-      password: 12345
+      name: '1user1',
+      email: '1babyteeth@hmail.com',
+      password: '12345'
     }),
     User.create({
-      name: 'user2',
-      email: 'babyteeth@hmail.com',
-      password: 123
+      name: '2user2',
+      email: '2babyteeth@hmail.com',
+      password: '123'
     }),
     User.create({
-      name: 'user3',
-      email: 'babyteeth@hmail.com',
-      password: 1234
+      name: '3user3',
+      email: '3babyteeth@hmail.com',
+      password: '1234'
     })
   ])
   console.log('Seeding success!')
