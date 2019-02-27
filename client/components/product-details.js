@@ -24,7 +24,6 @@ class ProductDetails extends Component {
           type="button"
           onClick={() => this.props.history.push('/products')}
         >
-          {' '}
           Return to all mittens
         </button>
       </div>
