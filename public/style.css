@@ -1,27 +1,19 @@
-/* body {
-  font-family: sans-serif;
-}
 
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
- */
 nav a {
   margin-left: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+nav i.material-icons {
+  font-size: 42px;
+}
+
+.googleLink a {
+  margin-right: 10%;
+}
+
+.card-image {
+  height: 400px; /* Your height here */
+  overflow: hidden;
 }
 
 .rootText {

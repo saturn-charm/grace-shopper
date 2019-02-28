@@ -1,7 +1,9 @@
 const db = require('./server/db/db')
 
-const User = require('./server/db/models/user')
-const Product = require('./server/db/models/product')
+const {User} = require('./server/db/models')
+const {Product} = require('./server/db/models')
+const {Order} = require('./server/db/models')
+const {ItemInOrder} = require('./server/db/models')
 
 const seed = async () => {
   await db.sync({force: true})
@@ -109,6 +111,44 @@ const seed = async () => {
       name: 'Fall Mittens',
       imageUrl:
         'https://www.unleashedlife.com/wp-content/uploads/2018/05/Wagwellies_008-600x600.jpg',
+      name: 'Fall Mittens',
+      imageUrl:
+        'https://www.k9ofmine.com/wp-content/uploads/2017/06/best-dog-booties-e1528318545334.jpg',
+      description: 'For those smaller tall dogs.',
+      stock: 0,
+      price: 0
+    }),
+    Product.create({
+      // gategory: 'Winter Mittens',
+      name: 'Winter Mittens',
+      imageUrl:
+        'https://www.bedandbiscuitaustin.com/wp-content/uploads/2017/11/Paw-Protection.jpg',
+      // gategory: 'Fall Mittens',
+      name: 'Fall Mittens',
+      imageUrl:
+        'https://topdogtips.com/wp-content/uploads/2016/03/Best-Dog-Booties-Best-Dog-Boots-for-Dogs-That-Stay-On.jpg',
+      description: 'For those smaller tall dogs.',
+      stock: 0,
+      price: 0
+    }),
+    Product.create({
+      // gategory: 'Winter Mittens',
+      name: 'Winter Mittens',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71Cf3MCaeaL._SX425_.jpg',
+      // gategory: 'Fall Mittens',
+      name: 'Fall Mittens',
+      imageUrl:
+        'https://www.certapet.com/wp-content/uploads/2018/08/white-puppy-wearing-dog-socks-and-dog-booties-dog-rain-boots-in-the-rainy-weather.jpg',
+      description: 'For those smaller tall dogs.',
+      stock: 0,
+      price: 0
+    }),
+    Product.create({
+      // gategory: 'Fall Mittens',
+      name: 'Fall Mittens',
+      imageUrl:
+        'https://www.unleashedlife.com/wp-content/uploads/2018/05/Wagwellies_008-600x600.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
@@ -127,6 +167,15 @@ const seed = async () => {
       name: 'Winter Mittens',
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/71Cf3MCaeaL._SX425_.jpg',
+      description: 'For those smaller tall dogs.',
+      stock: 0,
+      price: 0
+    }),
+    Product.create({
+      // gategory: 'Winter Mittens',
+      name: 'Winter Mittens',
+      imageUrl:
+        'https://ae01.alicdn.com/kf/HTB1RRB4OVXXXXckXXXXq6xXFXXXn/4pcs-set-Dog-Pet-Boots-Silica-Gel-Waterproof-Pet-Shoes-Outdoor-Rain-Cover-For-Yorkie-Teddy.jpg_640x640.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
@@ -168,6 +217,64 @@ const seed = async () => {
       password: '1234'
     })
   ])
+
+  const [order1, order2, order3] = await Promise.all([
+    Order.create({
+      purchased: false,
+      userId: user1.id
+    }),
+    Order.create({
+      purchased: false,
+      userId: user2.id
+    }),
+    Order.create({
+      purchased: false,
+      userId: user3.id
+    })
+  ])
+
+  const [item1, item2, item3, item4, item5, item6] = await Promise.all([
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Galoshes.id,
+      orderId: order1.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Sneaks.id,
+      orderId: order2.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: springMittens.id,
+      orderId: order3.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: winterMittens.id,
+      orderId: order1.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Galoshes.id,
+      orderId: order2.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Sneaks.id,
+      orderId: order3.id
+    })
+  ])
+  //
+  // const [singleProduct] = await Promise.all({
+  //
+  // })
   console.log('Seeding success!')
   db.close()
 }

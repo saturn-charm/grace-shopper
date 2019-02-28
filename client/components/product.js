@@ -14,6 +14,9 @@ export default function Product(props) {
             />
           </div>
           <div className="card-content">
+            <i className="material-icons pink-text pulse right">favorite</i>
+            <span className="card-title">{product.name}</span>
+            <p>{product.description}</p>
             <span className="card-title">Card Title</span>
             <p>I am a very simple card. I am good at containing.</p>
           </div>

@@ -21,6 +21,7 @@ const ItemInOrder = require('./item_in_order')
 Product.belongsToMany(Order, {through: ItemInOrder})
 Order.belongsToMany(Product, {through: ItemInOrder})
 User.hasMany(Order)
+Order.belongsTo(User)
 
 module.exports = {
   User,
