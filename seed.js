@@ -1,9 +1,9 @@
 const db = require('./server/db/db')
 
-const User = require('./server/db/models/user')
-const Product = require('./server/db/models/product')
-const Order = require('./server/db/models/order')
-const ItemInOrder = require('./server/db/models/item_in_order')
+const {User} = require('./server/db/models')
+const {Product} = require('./server/db/models')
+const {Order} = require('./server/db/models')
+const {ItemInOrder} = require('./server/db/models')
 
 const seed = async () => {
   await db.sync({force: true})
@@ -215,13 +215,13 @@ const seed = async () => {
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Galoshes.id,
-      orderId: order1.id
+      orderId: order2.id
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Sneaks.id,
-      orderId: order2.id
+      orderId: order3.id
     })
   ])
   //
