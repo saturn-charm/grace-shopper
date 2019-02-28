@@ -175,7 +175,16 @@ const seed = async () => {
       // gategory: 'Winter Mittens',
       name: 'Winter Mittens',
       imageUrl:
-        'https://ae01.alicdn.com/kf/HTB1RRB4OVXXXXckXXXXq6xXFXXXn/4pcs-set-Dog-Pet-Boots-Silica-Gel-Waterproof-Pet-Shoes-Outdoor-Rain-Cover-For-Yorkie-Teddy.jpg_640x640.jpg',
+        'https://www.bedandbiscuitaustin.com/wp-content/uploads/2017/11/Paw-Protection.jpg',
+      description: 'For those smaller tall dogs.',
+      stock: 0,
+      price: 0
+    }),
+    Product.create({
+      // gategory: 'Winter Mittens',
+      name: 'Winter Mittens',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71Cf3MCaeaL._SX425_.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0

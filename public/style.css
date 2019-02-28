@@ -3,6 +3,62 @@ nav a {
   margin-left: 1em;
 }
 
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+.rootText {
+  text-align: justify;
+}
+
+.responsive-img {
+  float: left;
+  margin-right: 1em;
+}
+
+nav i.material-icons {
+  font-size: 42px;
+}
+
+.googleLink a {
+  margin-right: 10%;
+}
+
+.card-image {
+  height: 400px; /* Your height here */
+  overflow: hidden;
+}
+
+button {
+  margin-bottom: 5%;
+  font-family: 'Laila', serif;
+}
+
+h1,
+h3 {
+  font-family: 'Pacifico', cursive;
+}
+
+.brand-logo {
+  font-family: 'Lobster', cursive;
+}
+
+h4 {
+  font-family: 'Abril Fatface', cursive;
+}
+
+.imgDetail {
+  float: right;
+}
+
+.waves-effect {
+  margin-top: 15%;
+}
+
+.detailText {
+  margin-bottom: 10%;
+=======
 nav i.material-icons {
   font-size: 42px;
 }

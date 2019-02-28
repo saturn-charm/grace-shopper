@@ -14,18 +14,27 @@ class ProductDetails extends Component {
   render() {
     return (
       <div className="center container">
-        <h1>{this.props.product.product.name}</h1>
-        <img height="400" src={this.props.product.product.imageUrl} />
-        <p>{this.props.product.product.description}</p>
-        <p>Price: {this.props.product.product.price}</p>
-        <p>Quantity: {this.props.product.product.stock}</p>
-        <button
-          className="waves-effect waves-light btn-large"
-          type="button"
-          onClick={() => this.props.history.push('/products')}
-        >
-          Return to all mittens
-        </button>
+        <div>
+          <h1 className="detailText">{this.props.product.product.name}</h1>
+          <img
+            className="imgDetail"
+            height="400"
+            src={this.props.product.product.imageUrl}
+          />
+          <h5>{this.props.product.product.description}</h5>
+          <h5>Price: {this.props.product.product.price}</h5>
+          <h5>
+            <strong>Quantity: {this.props.product.product.stock}</strong>
+          </h5>
+          <button
+            className="waves-effect waves-light btn-large"
+            type="button"
+            onClick={() => this.props.history.push('/products')}
+          >
+            Return to all mittens
+          </button>
+        </div>
+
       </div>
     )
   }
