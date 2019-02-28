@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Product(props) {
   const product = props.product
-  console.log(product)
   return (
     <div className="container">
       <div className="col s12 l6">
@@ -18,6 +17,8 @@ export default function Product(props) {
             <i className="material-icons pink-text pulse right">favorite</i>
             <span className="card-title">{product.name}</span>
             <p>{product.description}</p>
+            <span className="card-title">Card Title</span>
+            <p>I am a very simple card. I am good at containing.</p>
           </div>
         </div>
       </div>
