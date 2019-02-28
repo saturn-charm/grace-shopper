@@ -28,3 +28,33 @@ nav i.material-icons {
   height: 400px; /* Your height here */
   overflow: hidden;
 }
+
+button {
+  margin-bottom: 5%;
+  font-family: 'Laila', serif;
+}
+
+h1,
+h3 {
+  font-family: 'Pacifico', cursive;
+}
+
+.brand-logo {
+  font-family: 'Lobster', cursive;
+}
+
+h4 {
+  font-family: 'Abril Fatface', cursive;
+}
+
+.imgDetail {
+  float: right;
+}
+
+.waves-effect {
+  margin-top: 15%;
+}
+
+.detailText {
+  margin-bottom: 10%;
+}
