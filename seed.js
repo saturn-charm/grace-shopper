@@ -2,6 +2,8 @@ const db = require('./server/db/db')
 
 const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
+const Order = require('./server/db/models/order')
+const ItemInOrder = require('./server/db/models/item_in_order')
 
 const seed = async () => {
   await db.sync({force: true})
@@ -148,6 +150,60 @@ const seed = async () => {
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
+    })
+  ])
+
+  const [order1, order2, order3] = await Promise.all([
+    Order.create({
+      purchased: false,
+      userId: 1
+    }),
+    Order.create({
+      purchased: false,
+      userId: 2
+    }),
+    Order.create({
+      purchased: false,
+      userId: 3
+    })
+  ])
+
+  const [item1, item2, item3, item4, item5, item6] = await Promise.all([
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 1,
+      orderId: 1
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 2,
+      orderId: 1
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 3,
+      orderId: 2
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 4,
+      orderId: 2
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 5,
+      orderId: 3
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: 5,
+      orderId: 3
     })
   ])
 
