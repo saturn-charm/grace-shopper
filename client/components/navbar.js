@@ -10,7 +10,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       <div className="nav-wraper">
         <div className="container">
           <Link to="/aboutUs" className="brand-logo">
-            {' '}
             <i className="large material-icons"> pets </i>Mittens
           </Link>
           <Link to="/products" className="right">

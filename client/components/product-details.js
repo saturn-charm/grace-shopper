@@ -15,7 +15,7 @@ class ProductDetails extends Component {
     return (
       <div className="center container">
         <h1>{this.props.product.product.name}</h1>
-        <img height="300" src={this.props.product.product.imageUrl} />
+        <img height="400" src={this.props.product.product.imageUrl} />
         <p>{this.props.product.product.description}</p>
         <p>Price: {this.props.product.product.price}</p>
         <p>Quantity: {this.props.product.product.stock}</p>
