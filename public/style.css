@@ -1,3 +1,4 @@
+
 nav a {
   margin-left: 1em;
 }
@@ -57,4 +58,33 @@ h4 {
 
 .detailText {
   margin-bottom: 10%;
+=======
+nav i.material-icons {
+  font-size: 42px;
+}
+
+.googleLink a {
+  margin-right: 10%;
+}
+
+.card-image {
+  height: 400px; /* Your height here */
+  overflow: hidden;
+}
+
+.rootText {
+  text-align: justify;
+}
+
+.responsive-img {
+  float: left;
+  margin-right: 1em;
+}
+
+nav i.material-icons {
+  font-size: 42px;
+}
+
+.googleLink a {
+  margin-right: 10%;
 }

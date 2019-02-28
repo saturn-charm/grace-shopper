@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Product(props) {
   const product = props.product
-  console.log(product)
   return (
     <div className="container">
       <div className="col s12 l6">

@@ -34,6 +34,7 @@ class ProductDetails extends Component {
             Return to all mittens
           </button>
         </div>
+
       </div>
     )
   }
