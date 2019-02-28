@@ -14,16 +14,19 @@ class AllProducts extends Component {
   }
 
   render() {
+    const productList = this.props.products.map(product => {
+      return (
+        <div key={product.id}>
+          <Link to={`/products/` + product.id}>
+            <Product product={product} />
+          </Link>
+        </div>
+      )
+    })
     return (
-      <div id="all-products">
-        <p>All Products</p>
-        {this.props.products.map(product => (
-          <div key={product.id}>
-            <Link to={`/products/` + product.id}>
-              <Product product={product} />
-            </Link>
-          </div>
-        ))}
+      <div>
+        <h3 className="center">All Mittens</h3>
+        <div className="row">{productList}</div>
       </div>
     )
   }
