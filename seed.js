@@ -153,60 +153,6 @@ const seed = async () => {
     })
   ])
 
-  const [order1, order2, order3] = await Promise.all([
-    Order.create({
-      purchased: false,
-      userId: 1
-    }),
-    Order.create({
-      purchased: false,
-      userId: 2
-    }),
-    Order.create({
-      purchased: false,
-      userId: 3
-    })
-  ])
-
-  const [item1, item2, item3, item4, item5, item6] = await Promise.all([
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 1,
-      orderId: 1
-    }),
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 2,
-      orderId: 1
-    }),
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 3,
-      orderId: 2
-    }),
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 4,
-      orderId: 2
-    }),
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 5,
-      orderId: 3
-    }),
-    ItemInOrder.create({
-      numberOfItems: 1,
-      purchaseTotal: 0,
-      productId: 5,
-      orderId: 3
-    })
-  ])
-
   const [user1, user2, user3] = await Promise.all([
     User.create({
       name: 'user1',
@@ -224,6 +170,64 @@ const seed = async () => {
       password: '1234'
     })
   ])
+
+  const [order1, order2, order3] = await Promise.all([
+    Order.create({
+      purchased: false,
+      userId: user1.id
+    }),
+    Order.create({
+      purchased: false,
+      userId: user2.id
+    }),
+    Order.create({
+      purchased: false,
+      userId: user3.id
+    })
+  ])
+
+  const [item1, item2, item3, item4, item5, item6] = await Promise.all([
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Galoshes.id,
+      orderId: order1.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Sneaks.id,
+      orderId: order2.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: springMittens.id,
+      orderId: order3.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: winterMittens.id,
+      orderId: order1.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Galoshes.id,
+      orderId: order1.id
+    }),
+    ItemInOrder.create({
+      numberOfItems: 1,
+      purchaseTotal: 0,
+      productId: Sneaks.id,
+      orderId: order2.id
+    })
+  ])
+  //
+  // const [singleProduct] = await Promise.all({
+  //
+  // })
   console.log('Seeding success!')
   db.close()
 }
