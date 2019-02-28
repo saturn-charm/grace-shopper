@@ -8,6 +8,11 @@ const User = db.define('user', {
     unique: true
     // allowNull: false
   },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
