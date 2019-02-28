@@ -15,8 +15,8 @@ class AllProducts extends Component {
 
   render() {
     return (
-      <div id="all-products">
-        <p>All Products</p>
+      <div className="container">
+        <h3 className="center">All Mittens</h3>
         {this.props.products.map(product => (
           <div key={product.id}>
             <Link to={`/products/` + product.id}>
