@@ -11,27 +11,36 @@ form div {
   text-align: justify;
 }
 
+nav i.material-icons {
+  font-size: 42px;
+}
+
 .responsive-img {
   float: left;
   margin-right: 1em;
 }
 
-nav i.material-icons {
-  font-size: 42px;
-}
+/* .imgDetail {
+  height: 400;
+  width: 300;
+} */
 
 .googleLink a {
   margin-right: 10%;
 }
 
 .card-image {
-  height: 400px; /* Your height here */
+  height: 400px;
   overflow: hidden;
 }
 
-button {
-  margin-bottom: 5%;
+.waves-effect.waves-light.btn-large.detail {
+  margin-top: 10%;
   font-family: 'Laila', serif;
+}
+
+.waves-effect.teal.lighten-2.btn-large.aboutUs {
+  margin-top: 0%;
 }
 
 h1,
@@ -39,6 +48,9 @@ h3 {
   font-family: 'Pacifico', cursive;
 }
 
+p {
+  font-size: 18px;
+}
 .brand-logo {
   font-family: 'Lobster', cursive;
 }
@@ -51,9 +63,9 @@ h4 {
   float: right;
 }
 
-.waves-effect {
+/* .waves-effect {
   margin-top: 15%;
-}
+} */
 
 .detailText {
   margin-bottom: 10%;

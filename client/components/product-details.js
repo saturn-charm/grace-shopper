@@ -3,31 +3,31 @@ import {connect} from 'react-redux'
 import {getProductDetailsThunk} from '../store/product'
 
 class ProductDetails extends Component {
-  constructor(props) {
-    super(props)
-  }
-  async componentDidMount() {
+  componentDidMount() {
     const productId = this.props.match.params.productId
-    await this.props.getProductDetails(productId)
+    this.props.getProductDetails(productId)
   }
 
   render() {
+    console.log(this.props.productDetails)
     return (
       <div className="center container">
         <div>
-          <h1 className="detailText">{this.props.product.product.name}</h1>
+          <h1 className="detailText">
+            {this.props.productDetails.product.name}
+          </h1>
           <img
             className="imgDetail"
             height="400"
-            src={this.props.product.product.imageUrl}
+            src={this.props.productDetails.product.imageUrl}
           />
-          <h5>{this.props.product.product.description}</h5>
-          <h5>Price: {this.props.product.product.price}</h5>
-          <h5>
-            <strong>Quantity: {this.props.product.product.stock}</strong>
-          </h5>
+          <p>{this.props.productDetails.product.description}</p>
+          <p>Price: {this.props.productDetails.product.price}</p>
+          <p>
+            <strong>Quantity: {this.props.productDetails.product.stock}</strong>
+          </p>
           <button
-            className="waves-effect waves-light btn-large"
+            className="waves-effect waves-light btn-large detail"
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
@@ -41,8 +41,7 @@ class ProductDetails extends Component {
 
 const mapState = state => {
   return {
-    // products: state.products,
-    product: state.product
+    productDetails: state.product
   }
 }
 

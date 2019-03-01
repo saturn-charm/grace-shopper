@@ -9,8 +9,8 @@ class AllProducts extends Component {
     super(props)
   }
 
-  async componentDidMount() {
-    await this.props.getProductsThunkDispatch()
+  componentDidMount() {
+    this.props.getProductsThunkDispatch()
   }
 
   render() {
