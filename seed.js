@@ -111,9 +111,6 @@ const seed = async () => {
       name: 'Fall Mittens',
       imageUrl:
         'https://www.unleashedlife.com/wp-content/uploads/2018/05/Wagwellies_008-600x600.jpg',
-      name: 'Fall Mittens',
-      imageUrl:
-        'https://www.k9ofmine.com/wp-content/uploads/2017/06/best-dog-booties-e1528318545334.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
@@ -124,9 +121,6 @@ const seed = async () => {
       imageUrl:
         'https://www.bedandbiscuitaustin.com/wp-content/uploads/2017/11/Paw-Protection.jpg',
       // gategory: 'Fall Mittens',
-      name: 'Fall Mittens',
-      imageUrl:
-        'https://topdogtips.com/wp-content/uploads/2016/03/Best-Dog-Booties-Best-Dog-Boots-for-Dogs-That-Stay-On.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
@@ -137,9 +131,6 @@ const seed = async () => {
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/71Cf3MCaeaL._SX425_.jpg',
       // gategory: 'Fall Mittens',
-      name: 'Fall Mittens',
-      imageUrl:
-        'https://www.certapet.com/wp-content/uploads/2018/08/white-puppy-wearing-dog-socks-and-dog-booties-dog-rain-boots-in-the-rainy-weather.jpg',
       description: 'For those smaller tall dogs.',
       stock: 0,
       price: 0
