@@ -1,28 +1,34 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProductDetailsThunk} from '../store/product'
+import {getProductDetailsThunk, updateQuantity} from '../store/product'
 import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
     this.handleAddToCart = this.handleAddToCart.bind(this)
+    this.decrease = this.decrease.bind(this)
+    this.increase = this.increase.bind(this)
   }
   async componentDidMount() {
     const productId = this.props.match.params.productId
     await this.props.getProductDetails(productId)
   }
+
+  decrease() {
+    const stock = this.props.currentProduct.stock
+    const productId = this.props.currentProduct.id
+    this.props.updateQuantity(productId, stock - 1)
+  }
+
+  increase() {
+    const stock = this.props.currentProduct.stock
+    const productId = this.props.currentProduct.id
+    this.props.updateQuantity(productId, stock + 1)
+  }
+
   handleAddToCart() {
-    console.log('add to cart has been clicked')
-    console.log('currentProduct on productDetails: ', this.props.currentProduct)
-    this.props
-      .getUserOrderThunkDispatch()
-      .then(() =>
-        console.log(
-          'state after getting/creating order for user: ',
-          this.props.state
-        )
-      )
+    this.props.getUserOrderThunkDispatch()
   }
 
   render() {
@@ -44,9 +50,19 @@ class ProductDetails extends Component {
             className="waves-effect waves-light btn-large"
             type="button"
             onClick={this.handleAddToCart}
+            onClick={this.decrease}
           >
             Add to cart
           </button>
+
+          <button
+            className="waves-effect pink btn-large"
+            type="button"
+            onClick={this.increase}
+          >
+            undo
+          </button>
+
           <button
             className="waves-effect waves-light btn-large"
             type="button"
@@ -63,7 +79,6 @@ class ProductDetails extends Component {
 const mapState = state => {
   console.log('state in mapstatetoprops (in productdetails component): ', state)
   return {
-    // products: state.products,
     currentProduct: state.product.product,
     user: state.user,
     currentOrder: state.order.myCart
@@ -73,7 +88,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
-    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk())
+    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
+    updateQuantity: (productId, stock) =>
+      dispatch(updateQuantity(productId, stock))
   }
 }
 

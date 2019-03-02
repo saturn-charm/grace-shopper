@@ -24,4 +24,19 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
+router.put('/:productId', async (req, res, next) => {
+  try {
+    console.log('QUANTATY: ', req.params.productId, req.body.stock)
+    const productId = req.params.productId
+    const order = await Product.findById(productId)
+    if (!order) res.sendStatus(404)
+    const updated = await order.update({
+      stock: req.body.stock
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
