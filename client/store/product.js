@@ -10,6 +10,7 @@ const initialState = {
 // ACTION TYPES
 const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
 const GET_PRODUCT_DETAILS = 'GET_PRODUCT_DETAILS'
+const UPDATE_STOCK = 'UPDATE_STOCK'
 
 // ACTION CREATORS
 const getProductsFromServer = products => ({
@@ -46,6 +47,25 @@ export const getProductDetailsThunk = productId => {
     }
   }
 }
+
+// export const changeQuantity = (productId, stock) => {
+//   return axios
+//     .put(`api/product/${productId}/incart`, { stock })
+//     .then(res => res.data);
+// };
+
+export const updateQuantity = (productId, stock) => {
+  return async dispatch => {
+    try {
+      const order = await axios.put(`/api/products/${productId}`, {stock})
+      //dispatch(getProductsFromServer([order.data]));
+      dispatch(getProductDetails(order.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
