@@ -8,6 +8,12 @@ const ItemInOrder = db.define('item-in-order', {
   purchaseTotal: {
     type: Sequelize.DECIMAL
   }
+  // unique: false
+  // validate: {
+  //   isUnique: function (value, next) {
+  //     ItemInOrder.find({
+  //       where: {orderId: }
+  //     })
 })
 
 module.exports = ItemInOrder

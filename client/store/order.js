@@ -10,6 +10,7 @@ const initialState = {
 // ACTION TYPES
 const GET_USER_ORDER = 'GET_USER_ORDER'
 const ADD_ITEM_TO_ORDER = 'ADD_ITEM_TO_ORDER'
+const GET_ITEM_IN_ORDER = 'GET_ITEM_IN_ORDER'
 
 // ACTION CREATORS
 const getUserOrder = order => ({
@@ -18,6 +19,11 @@ const getUserOrder = order => ({
 })
 const addItemToOrder = item => ({
   type: ADD_ITEM_TO_ORDER,
+  item
+})
+
+const getItemInOrder = item => ({
+  type: GET_ITEM_IN_ORDER,
   item
 })
 
@@ -33,6 +39,19 @@ export const getUserOrderThunk = () => {
     }
   }
 }
+
+export const getItemsInOrderThunk = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/itemsInOrder/${productId}`)
+      const existingOrder = response.data
+      dispatch(getItemInOrder(existingOrder))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 export const addItemToOrderThunk = item => {
   return async dispatch => {
     try {
@@ -49,10 +68,13 @@ export const addItemToOrderThunk = item => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_ORDER: {
-      console.log('in get user order switch case')
+      // console.log('in get user order switch case')
       return {...state, myCart: action.order}
     }
     case ADD_ITEM_TO_ORDER: {
+      return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
+    }
+    case GET_ITEM_IN_ORDER: {
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
     }
     default:

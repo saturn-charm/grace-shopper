@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const {Product, ItemInOrder} = require('../db/models')
 
-// /products
+// api/products
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
@@ -26,7 +26,6 @@ router.get('/:productId', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    console.log('QUANTATY: ', req.params.productId, req.body.stock)
     const productId = req.params.productId
     const order = await Product.findById(productId)
     if (!order) res.sendStatus(404)

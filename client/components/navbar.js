@@ -9,11 +9,22 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <div className="nav-wraper">
         <div className="container">
-          <Link to="/aboutUs" className="brand-logo">
-            <i className="large material-icons"> pets </i>Mittens
-          </Link>
           <Link to="/products" className="right">
             All Mittens
+          </Link>
+          <ul>
+            <Link
+              to="/orders"
+              className="btn-floating z-depth-0 indigo darken-4 right"
+            >
+              <i className="tiny material-icons">shopping_basket</i>
+            </Link>
+            <li>
+              <span className="badge white-text new pink right">5</span>
+            </li>
+          </ul>
+          <Link to="/aboutUs" className="brand-logo">
+            <i className="large material-icons"> pets </i>Mittens
           </Link>
           <div className="right">
             {isLoggedIn ? (

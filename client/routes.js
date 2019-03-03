@@ -7,6 +7,7 @@ import {me} from './store'
 import ProductDetails from './components/product-details'
 import AllProducts from './components/all-products'
 import AboutUs from './components/About-us'
+import Order from './components/order'
 
 /**
  * COMPONENT
@@ -27,6 +28,7 @@ class Routes extends Component {
         <Route exact path="/aboutUs" component={AboutUs} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={ProductDetails} />
+        <Route exact path="/orders" component={Order} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
