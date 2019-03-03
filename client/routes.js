@@ -14,7 +14,7 @@ import AboutUs from './components/About-us'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    console.log('props in Routes: ', this.props)
+    //console.log('props in Routes: ', this.props)
   }
 
   render() {

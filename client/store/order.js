@@ -16,9 +16,10 @@ const getUserOrder = order => ({
   type: GET_USER_ORDER,
   order
 })
-const addItemToOrder = item => ({
+const addItemToOrder = (item, orderId) => ({
   type: ADD_ITEM_TO_ORDER,
-  item
+  item,
+  orderId
 })
 
 // THUNK CREATORS
@@ -33,10 +34,10 @@ export const getUserOrderThunk = () => {
     }
   }
 }
-export const addItemToOrderThunk = item => {
+export const addItemToOrderThunk = (item, orderId) => {
   return async dispatch => {
     try {
-      const response = await axios.post('/api/orders', item)
+      const response = await axios.post('/api/orders/newItem', [item, orderId])
       const orderItem = response.data
       dispatch(addItemToOrder(orderItem))
     } catch (error) {

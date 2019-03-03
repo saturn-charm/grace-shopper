@@ -11,18 +11,16 @@ class ProductDetails extends Component {
   async componentDidMount() {
     const productId = this.props.match.params.productId
     await this.props.getProductDetails(productId)
+    await this.props.getUserOrderThunkDispatch()
+    //console.log("currentorder id: ", this.props.currentOrder.id)
   }
   handleAddToCart() {
     console.log('add to cart has been clicked')
-    console.log('currentProduct on productDetails: ', this.props.currentProduct)
-    this.props
-      .getUserOrderThunkDispatch()
-      .then(() =>
-        console.log(
-          'state after getting/creating order for user: ',
-          this.props.state
-        )
-      )
+    console.log('currentorder id: ', this.props.currentOrder.id)
+    this.props.addItemToOrderThunkDispatch(
+      this.props.currentProduct,
+      this.props.currentOrder.id
+    )
   }
 
   render() {
@@ -66,14 +64,17 @@ const mapState = state => {
     // products: state.products,
     currentProduct: state.product.product,
     user: state.user,
-    currentOrder: state.order.myCart
+    currentOrder: state.order.myCart,
+    itemsInCart: state.order.itemsInCart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
-    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk())
+    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
+    addItemToOrderThunkDispatch: (item, orderId) =>
+      dispatch(addItemToOrderThunk(item, orderId))
   }
 }
 
