@@ -38,7 +38,6 @@ const AboutUs = () => (
     <Link to="/products">
       <p className="center-align">
         <button type="button" className="waves-effect teal lighten-2 btn-large">
-
           <i className="material-icons"> shopping_basket SHOP NOW </i>
         </button>
       </p>

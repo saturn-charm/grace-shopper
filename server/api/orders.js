@@ -20,18 +20,35 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+//api/itemsInOrder/
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const orderItems = await ItemInOrder.findAll({
+      where: {
+        orderId: req.params.orderId
+      }
+    })
+    res.json(orderItems)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/newItem', async (req, res, next) => {
   try {
     console.log('req.body[0] in post request for new item: ', req.body[0])
     console.log('req.body[1] in post request for new item: ', req.body[1])
-    console.log('typeof price', typeof Number(req.body[0].price))
-    const orderItem = await ItemInOrder.create({
-      productId: req.body[0].id,
-      orderId: req.body[1],
-      purchaseTotal: req.body[0].price,
-      numberOfItems: 1
-    }) //price here is a string for some reason
-    res.json(orderItem)
+    console.log('id', req.body[0].id)
+    const orderItem = await ItemInOrder.find({
+      where: {
+        productId: req.body[0].id,
+        orderId: req.body[1]
+        // purchaseTotal: req.body[0].price,
+        //numberOfItems: 1
+      }
+    })
+    //console.log("orderitem: ", orderItem)
+    res.json(orderItem.data)
   } catch (err) {
     next(err)
   }

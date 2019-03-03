@@ -6,7 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import ProductDetails from './components/product-details'
 import AllProducts from './components/all-products'
-import AboutUs from './components/About-us'
+import AboutUs from './components/about-us'
 
 /**
  * COMPONENT

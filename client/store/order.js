@@ -10,6 +10,7 @@ const initialState = {
 // ACTION TYPES
 const GET_USER_ORDER = 'GET_USER_ORDER'
 const ADD_ITEM_TO_ORDER = 'ADD_ITEM_TO_ORDER'
+const GET_CART_CONTENTS = 'GET_CART_CONTENTS'
 
 // ACTION CREATORS
 const getUserOrder = order => ({
@@ -21,14 +22,23 @@ const addItemToOrder = (item, orderId) => ({
   item,
   orderId
 })
+const getCartContents = itemsInOrder => ({
+  type: GET_CART_CONTENTS,
+  itemsInOrder
+})
 
 // THUNK CREATORS
 export const getUserOrderThunk = () => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/orders')
-      const existingOrder = response.data
+      const orderResponse = await axios.get('/api/orders')
+      const existingOrder = orderResponse.data
+      const itemsInOrderResponse = await axios.get(
+        `/api/orders/${existingOrder.id}`
+      )
+      const stuffInCartAlready = itemsInOrderResponse.data
       dispatch(getUserOrder(existingOrder))
+      dispatch(getCartContents(stuffInCartAlready))
     } catch (error) {
       console.error(error)
     }
@@ -52,6 +62,10 @@ const reducer = (state = initialState, action) => {
     case GET_USER_ORDER: {
       console.log('in get user order switch case')
       return {...state, myCart: action.order}
+    }
+    case GET_CART_CONTENTS: {
+      console.log('in get cart contents switch case')
+      return {...state, itemsInOrder: action.itemsInOrder}
     }
     case ADD_ITEM_TO_ORDER: {
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
