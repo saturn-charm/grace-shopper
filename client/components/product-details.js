@@ -12,7 +12,7 @@ class ProductDetails extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const productId = this.props.match.params.productId
     await this.props.getProductDetails(productId)
     await this.props.getUserOrderThunkDispatch()
@@ -74,7 +74,7 @@ class ProductDetails extends Component {
           >
             Add to cart
           </button>
-      
+
           <button
             className="waves-effect waves-light btn-large"
             type="button"
@@ -102,7 +102,6 @@ const mapState = state => {
     user: state.user,
     currentOrder: state.order.myCart,
     itemsInCart: state.order.itemsInCart
-
   }
 }
 
