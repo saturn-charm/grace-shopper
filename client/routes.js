@@ -10,7 +10,8 @@ import {
   UserHome,
   AllProducts,
   ProductDetails,
-  AboutUs
+  AboutUs,
+  Order
 } from './components'
 
 /**
