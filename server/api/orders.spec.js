@@ -34,12 +34,12 @@ describe('Order routes', () => {
         userId: user1.id
       })
 
-      // itemInOrder1 = await ItemInOrder.create({
-      //   numberOfItems: 1,
-      //   purchaseTotal: 9,
-      //   productId: product1.id,
-      //   orderId: order1.id
-      // })
+      itemInOrder1 = await ItemInOrder.create({
+        numberOfItems: 1,
+        purchaseTotal: 9,
+        productId: product1.id,
+        orderId: order1.id
+      })
     })
 
     it('GET /api/orders', async () => {
@@ -47,8 +47,8 @@ describe('Order routes', () => {
         .get('/api/orders')
         .expect(200)
 
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].purchased).to.be.equal(orderPurchased)
+      expect(res.body).to.be.an('object')
+      expect(res.body.purchased).to.be.equal(orderPurchased)
     })
   }) // end describe('/api/orders')
 }) // end describe('Order routes')
