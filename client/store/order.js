@@ -49,6 +49,7 @@ export const addItemToOrderThunk = (item, orderId) => {
     try {
       const response = await axios.post('/api/orders/newItem', [item, orderId])
       const orderItem = response.data
+      console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
     } catch (error) {
       console.error(error)
@@ -66,6 +67,16 @@ const reducer = (state = initialState, action) => {
       return {...state, itemsInOrder: action.itemsInOrder}
     }
     case ADD_ITEM_TO_ORDER: {
+      console.log('itemsinorder from state: ', state.itemsInOrder)
+      console.log('item from action', action.item)
+      const filtered = state.itemsInOrder.filter(
+        item =>
+          item.orderId === action.item.orderId &&
+          item.productId === action.item.productId
+      )
+      if (filtered.length > 0) {
+        return {...state}
+      }
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
     }
     default:

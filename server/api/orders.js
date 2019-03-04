@@ -42,20 +42,16 @@ router.get('/:orderId', async (req, res, next) => {
 
 router.post('/newItem', async (req, res, next) => {
   try {
-    console.log('req.body[0] in post request for new item: ', req.body[0])
-    console.log('req.body[1] in post request for new item: ', req.body[1])
-    console.log('id', req.body[0].id)
     const orderItem = await ItemInOrder.find({
       where: {
         productId: req.body[0].id,
         orderId: req.body[1]
-        // purchaseTotal: req.body[0].price,
-        //numberOfItems: 1
       }
     })
     if (!orderItem) {
       console.log(
-        "~~~~~~~~~~~~~~~~didn't find exisitng orderitem, making new one~~~~~~~~~~~~~~~~~~~"
+        "~~~~~~~~~~~~~~~~didn't find exisitng orderitem, making new one~~~~~~~~~~~~~~~~~~~",
+        req.body
       )
       const newOrderItem = await ItemInOrder.create({
         productId: req.body[0].id,
@@ -63,11 +59,10 @@ router.post('/newItem', async (req, res, next) => {
         numberOfItems: 1,
         purchaseTotal: req.body[0].price
       })
-      res.json(newOrderItem.data)
+      res.json(newOrderItem)
     } else {
-      res.json(orderItem.data)
+      res.json(orderItem)
     }
-    //console.log("orderitem: ", orderItem)
   } catch (err) {
     next(err)
   }
