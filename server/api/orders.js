@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
+//api/orders
 router.get('/', async (req, res, next) => {
   try {
     if (req.session.passport) {
@@ -8,10 +9,6 @@ router.get('/', async (req, res, next) => {
         where: {userId: req.session.passport.user},
         include: [{model: Product}]
       })
-      console.log(
-        'response from findorcreate in get route for order: ',
-        response[1]
-      )
       res.json(response[0])
     } else {
       console.log('no user on session')
@@ -23,10 +20,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//api/itemsInOrder/:orderId
-router.get('/:orderId', async (req, res, next) => {
+//api/orders/itemsInOrder/:orderId
+router.get('/itemsInOrder/:orderId', async (req, res, next) => {
   try {
-    console.log('GETTIBG ITEMS from ORDER ')
     const orderItems = await ItemInOrder.findAll({
       where: {
         orderId: req.params.orderId
@@ -38,6 +34,7 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
+//api/orders/newItem
 router.post('/newItem', async (req, res, next) => {
   try {
     const orderItems = await ItemInOrder.findAll({
@@ -51,6 +48,7 @@ router.post('/newItem', async (req, res, next) => {
   }
 })
 
+//api/orders/newItem
 router.post('/newItem', async (req, res, next) => {
   try {
     const orderItem = await ItemInOrder.find({
@@ -60,10 +58,6 @@ router.post('/newItem', async (req, res, next) => {
       }
     })
     if (!orderItem) {
-      console.log(
-        "~~~~~~~~~~~~~~~~didn't find exisitng orderitem, making new one~~~~~~~~~~~~~~~~~~~",
-        req.body
-      )
       const newOrderItem = await ItemInOrder.create({
         productId: req.body[0].id,
         orderId: req.body[1],

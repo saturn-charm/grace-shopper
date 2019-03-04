@@ -1,11 +1,4 @@
 import axios from 'axios'
-import history from '../history'
-
-// INITIAL STATE
-const initialState = {
-  products: [],
-  product: {}
-}
 
 // ACTION TYPES
 const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
@@ -30,7 +23,7 @@ export const getProductsThunk = () => {
       const products = response.data
       dispatch(getProductsFromServer(products))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -42,7 +35,7 @@ export const getProductDetailsThunk = productId => {
       const product = response.data
       dispatch(getProductDetails(product))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -53,9 +46,15 @@ export const updateQuantityThunk = (productId, stock) => {
       const order = await axios.put(`/api/products/${productId}`, {stock})
       dispatch(getProductDetails(order.data))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
+}
+
+// INITIAL STATE
+const initialState = {
+  products: [],
+  product: {}
 }
 
 // REDUCER

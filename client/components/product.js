@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (Product = props => {
+const Product = props => {
   const product = props.product
   return (
     <div className="container">
@@ -22,4 +22,6 @@ export default (Product = props => {
       </div>
     </div>
   )
-})
+}
+
+export default Product
