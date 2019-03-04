@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getUserOrderThunk, getItemsInOrderThunk} from '../store/order'
-// import ProductDetails from './product-details'
+import {getUserOrderThunk} from '../store/order'
 
 export class Order extends Component {
   constructor(props) {
@@ -10,25 +9,21 @@ export class Order extends Component {
 
   componentDidMount() {
     this.props.getUserOrderThunkDispatch()
-    //this.props.getItemsInOrderThunk()
   }
 
   render() {
-    console.log('ORDER CART, ', this.props.user, this.props.currentProduct)
+    const productName = this.props.currentOrder.products
+    const name =
+      productName &&
+      productName.map(product => {
+        return product.name + ' ' + 'price: $' + product.price + ' '
+      })
+    console.log('ORDER CART, ', this.props.currentOrder)
     return (
       <div className="container">
         <h1>Hola</h1>
-        <h3>
-          {
-            //this.props.user.email
-          }
-        </h3>
-        <h3>
-          Your order:{' '}
-          {
-            //this.props.currentProduct.name
-          }
-        </h3>
+        <h3>{this.props.user.email}</h3>
+        <h3> Your order: {name}</h3>
       </div>
     )
   }
@@ -37,15 +32,14 @@ export class Order extends Component {
 const mapStatetoProps = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart
-    //currentProduct: state.product.product
+    currentOrder: state.order.myCart,
+    itemsInCart: state.order.itemsInOrder
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk())
-    //getItemsInOrderThunk: () => dispatch(getItemsInOrderThunk())
   }
 }
 
