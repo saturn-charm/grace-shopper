@@ -12,11 +12,8 @@ class ProductDetails extends Component {
     const productId = this.props.match.params.productId
     await this.props.getProductDetails(productId)
     await this.props.getUserOrderThunkDispatch()
-    //console.log("currentorder id: ", this.props.currentOrder.id)
   }
   handleAddToCart() {
-    console.log('add to cart has been clicked')
-    console.log('currentorder id: ', this.props.currentOrder.id)
     this.props.addItemToOrderThunkDispatch(
       this.props.currentProduct,
       this.props.currentOrder.id
@@ -59,9 +56,7 @@ class ProductDetails extends Component {
 }
 
 const mapState = state => {
-  console.log('state in mapstatetoprops (in productdetails component): ', state)
   return {
-    // products: state.products,
     currentProduct: state.product.product,
     user: state.user,
     currentOrder: state.order.myCart,

@@ -3,18 +3,24 @@ const {Order, ItemInOrder} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(
-      'req.session.passport.user in order get route: ',
-      req.session.passport.user
-    )
-    const response = await Order.findOrCreate({
-      where: {userId: req.session.passport.user}
-    })
-    console.log(
-      'response from findorcreate in get route for order: ',
-      response[1]
-    )
-    res.json(response[0])
+    // console.log(
+    //   'req.session.passport.user in order get route: ',
+    //   req.session.passport.user
+    // )
+    if (req.session.passport) {
+      const response = await Order.findOrCreate({
+        where: {userId: req.session.passport.user}
+      })
+      console.log(
+        'response from findorcreate in get route for order: ',
+        response[1]
+      )
+      res.json(response[0])
+    } else {
+      console.log('no user on session')
+      const guestOrder = await Order.create({})
+      res.json(guestOrder)
+    }
   } catch (err) {
     next(err)
   }
