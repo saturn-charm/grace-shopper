@@ -6,7 +6,7 @@ const ItemInOrder = db.define('item-in-order', {
     type: Sequelize.SMALLINT
   },
   purchaseTotal: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.SMALLINT
   }
 })
 

@@ -47,8 +47,21 @@ router.post('/newItem', async (req, res, next) => {
         //numberOfItems: 1
       }
     })
+    if (!orderItem) {
+      console.log(
+        "~~~~~~~~~~~~~~~~didn't find exisitng orderitem, making new one~~~~~~~~~~~~~~~~~~~"
+      )
+      const newOrderItem = await ItemInOrder.create({
+        productId: req.body[0].id,
+        orderId: req.body[1],
+        numberOfItems: 1,
+        purchaseTotal: req.body[0].price
+      })
+      res.json(newOrderItem.data)
+    } else {
+      res.json(orderItem.data)
+    }
     //console.log("orderitem: ", orderItem)
-    res.json(orderItem.data)
   } catch (err) {
     next(err)
   }

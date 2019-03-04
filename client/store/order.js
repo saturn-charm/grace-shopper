@@ -49,7 +49,7 @@ export const addItemToOrderThunk = (item, orderId) => {
     try {
       const response = await axios.post('/api/orders/newItem', [item, orderId])
       const orderItem = response.data
-      dispatch(addItemToOrder(orderItem))
+      dispatch(addItemToOrder(orderItem, orderId))
     } catch (error) {
       console.error(error)
     }
@@ -68,6 +68,10 @@ const reducer = (state = initialState, action) => {
       return {...state, itemsInOrder: action.itemsInOrder}
     }
     case ADD_ITEM_TO_ORDER: {
+      console.log(
+        'in add item to order switch case, heres the item: ',
+        action.item
+      )
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
     }
     default:
