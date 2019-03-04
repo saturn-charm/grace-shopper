@@ -1,10 +1,13 @@
 const router = require('express').Router()
-const {Order, ItemInOrder} = require('../db/models')
+const {Order, ItemInOrder, Product} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
+        where: {userId: req.session.passport.user},
+        include: [{model: Product}]
+      })
         where: {userId: req.session.passport.user}
       })
       console.log(
@@ -17,7 +20,6 @@ router.get('/', async (req, res, next) => {
       const guestOrder = await Order.create({})
       res.json(guestOrder)
     }
-
   } catch (err) {
     next(err)
   }
@@ -25,6 +27,20 @@ router.get('/', async (req, res, next) => {
 
 //api/itemsInOrder/:orderId
 router.get('/:orderId', async (req, res, next) => {
+  try {
+    console.log('GETTIBG ITEMS from ORDER ')
+    const orderItems = await ItemInOrder.findAll({
+      where: {
+        orderId: req.params.orderId
+      }
+    })
+    res.json(orderItems)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/newItem', async (req, res, next) => {
   try {
     const orderItems = await ItemInOrder.findAll({
       where: {
@@ -60,11 +76,9 @@ router.post('/newItem', async (req, res, next) => {
     } else {
       res.json(orderItem)
     }
-
   } catch (err) {
     next(err)
   }
 })
 
 module.exports = router
-
