@@ -14,10 +14,10 @@ class ProductDetails extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const productId = this.props.match.params.productId
-    await this.props.getProductDetails(productId)
-    await this.props.getUserOrderThunkDispatch()
+    this.props.getProductDetails(productId)
+    this.props.getUserOrderThunkDispatch()
   }
   handleAddToCart() {
     this.props.addItemToOrderThunkDispatch(
