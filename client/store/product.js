@@ -47,6 +47,7 @@ export const getProductDetailsThunk = productId => {
   }
 }
 
+
 export const updateQuantity = (productId, stock) => {
   return async dispatch => {
     try {

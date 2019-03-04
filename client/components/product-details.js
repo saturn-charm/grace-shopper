@@ -6,9 +6,7 @@ import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      value: 1
-    }
+
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -31,6 +29,22 @@ class ProductDetails extends Component {
     this.setState({
       value: evt.target.value
     })
+  }
+
+  decrease() {
+    const stock = this.props.currentProduct.stock
+    const productId = this.props.currentProduct.id
+    this.props.updateQuantity(productId, stock - 1)
+  }
+
+  increase() {
+    const stock = this.props.currentProduct.stock
+    const productId = this.props.currentProduct.id
+    this.props.updateQuantity(productId, stock + 1)
+  }
+
+  handleAddToCart() {
+    this.props.getUserOrderThunkDispatch()
   }
 
   render() {
@@ -73,8 +87,9 @@ class ProductDetails extends Component {
           >
             Add to cart
           </button>
+      
           <button
-            className="waves-effect waves-light btn-large product"
+            className="waves-effect waves-light btn-large"
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
@@ -100,6 +115,7 @@ const mapDispatch = dispatch => {
     getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
     getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
     addItemToOrderThunk: item => dispatch(addItemToOrderThunk(item)),
+
     updateQuantity: (productId, stock) =>
       dispatch(updateQuantity(productId, stock))
   }
