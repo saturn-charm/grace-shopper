@@ -7,7 +7,9 @@ import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
-
+    this.state = {
+      value: 1
+    }
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -28,10 +30,6 @@ class ProductDetails extends Component {
     this.setState({
       value: evt.target.value
     })
-  }
-
-  handleAddToCart() {
-    this.props.getUserOrderThunkDispatch()
   }
 
   render() {
@@ -74,16 +72,8 @@ class ProductDetails extends Component {
           >
             Add to cart
           </button>
-
           <button
-            className="waves-effect waves-light btn-large"
-            type="button"
-            onClick={this.handleAddToCart}
-          >
-            Add to cart
-          </button>
-          <button
-            className="waves-effect waves-light btn-large"
+            className="waves-effect waves-light btn-large product"
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
@@ -96,7 +86,7 @@ class ProductDetails extends Component {
 }
 
 const mapState = state => {
-  console.log('state in mapstatetoprops (in productdetails component): ', state)
+  //console.log('state in mapstatetoprops (in productdetails component): ', state)
   return {
     currentProduct: state.product.product,
     user: state.user,

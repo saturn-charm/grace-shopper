@@ -9,8 +9,8 @@ export class Order extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserOrderThunk()
-    this.props.getItemsInOrderThunk()
+    this.props.getUserOrderThunkDispatch()
+    //this.props.getItemsInOrderThunk()
   }
 
   render() {
@@ -18,26 +18,35 @@ export class Order extends Component {
     return (
       <div className="container">
         <h1>Hola</h1>
-        <h3>{this.props.user.email}</h3>
-        <h3>Your order: {this.props.currentProduct.name}</h3>
+        <h3>
+          {
+            //this.props.user.email
+          }
+        </h3>
+        <h3>
+          Your order:{' '}
+          {
+            //this.props.currentProduct.name
+          }
+        </h3>
       </div>
     )
   }
 }
 
-const mapPropToCart = state => {
+const mapStatetoProps = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart,
-    currentProduct: state.product.product
+    currentOrder: state.order.myCart
+    //currentProduct: state.product.product
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getUserOrderThunk: () => dispatch(getUserOrderThunk()),
-    getItemsInOrderThunk: () => dispatch(getItemsInOrderThunk())
+    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk())
+    //getItemsInOrderThunk: () => dispatch(getItemsInOrderThunk())
   }
 }
 
-export default connect(mapPropToCart, mapDispatch)(Order)
+export default connect(mapStatetoProps, mapDispatch)(Order)
