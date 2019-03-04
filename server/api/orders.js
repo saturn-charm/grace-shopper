@@ -8,6 +8,12 @@ router.get('/', async (req, res, next) => {
         where: {userId: req.session.passport.user},
         include: [{model: Product}]
       })
+        where: {userId: req.session.passport.user}
+      })
+      console.log(
+        'response from findorcreate in get route for order: ',
+        response[1]
+      )
       res.json(response[0])
     } else {
       console.log('no user on session')
@@ -23,6 +29,19 @@ router.get('/', async (req, res, next) => {
 router.get('/:orderId', async (req, res, next) => {
   try {
     console.log('GETTIBG ITEMS from ORDER ')
+    const orderItems = await ItemInOrder.findAll({
+      where: {
+        orderId: req.params.orderId
+      }
+    })
+    res.json(orderItems)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/newItem', async (req, res, next) => {
+  try {
     const orderItems = await ItemInOrder.findAll({
       where: {
         orderId: req.params.orderId
