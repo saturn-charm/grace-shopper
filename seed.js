@@ -219,15 +219,15 @@ const seed = async () => {
   const [order1, order2, order3] = await Promise.all([
     Order.create({
       purchased: false,
-      userId: user1.id
+      userId: 1
     }),
     Order.create({
       purchased: false,
-      userId: user2.id
+      userId: 2
     }),
     Order.create({
       purchased: false,
-      userId: user3.id
+      userId: 3
     })
   ])
 
@@ -236,37 +236,37 @@ const seed = async () => {
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Galoshes.id,
-      orderId: order1.id
+      orderId: 1
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Sneaks.id,
-      orderId: order2.id
+      orderId: 1
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: springMittens.id,
-      orderId: order3.id
+      orderId: 2
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: winterMittens.id,
-      orderId: order1.id
+      orderId: 2
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Galoshes.id,
-      orderId: order2.id
+      orderId: 3
     }),
     ItemInOrder.create({
       numberOfItems: 1,
       purchaseTotal: 0,
       productId: Sneaks.id,
-      orderId: order3.id
+      orderId: 3
     })
   ])
 
