@@ -8,8 +8,6 @@ router.get('/', async (req, res, next) => {
         where: {userId: req.session.passport.user},
         include: [{model: Product}]
       })
-        where: {userId: req.session.passport.user}
-      })
       console.log(
         'response from findorcreate in get route for order: ',
         response[1]
