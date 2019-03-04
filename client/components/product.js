@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Product(props) {
+export default (Product = props => {
   const product = props.product
   return (
     <div className="container">
@@ -22,8 +22,4 @@ export default function Product(props) {
       </div>
     </div>
   )
-}
-
-//  <div className="listed-product-text">
-// <p className="listed-product-name">{product.name}</p>
-// <p className="listed-product-price">{product.price}</p>
+})

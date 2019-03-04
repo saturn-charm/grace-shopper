@@ -47,8 +47,7 @@ export const getProductDetailsThunk = productId => {
   }
 }
 
-
-export const updateQuantity = (productId, stock) => {
+export const updateQuantityThunk = (productId, stock) => {
   return async dispatch => {
     try {
       const order = await axios.put(`/api/products/${productId}`, {stock})

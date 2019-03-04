@@ -18,7 +18,6 @@ export class Order extends Component {
       productName.map(product => {
         return product.name + ' ' + 'price: $' + product.price + ' '
       })
-    console.log('ORDER CART, ', this.props.currentOrder)
     return (
       <div className="container">
         <h1>Hola</h1>
@@ -29,11 +28,10 @@ export class Order extends Component {
   }
 }
 
-const mapStatetoProps = state => {
+const mapState = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart,
-    itemsInCart: state.order.itemsInOrder
+    currentOrder: state.order.myCart
   }
 }
 
@@ -43,4 +41,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatch)(Order)
+export default connect(mapState, mapDispatch)(Order)

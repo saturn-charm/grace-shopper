@@ -19,7 +19,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/products" className="right">
             All Mittens
           </Link>
-          <Link to="/aboutUs" className="brand-logo">
+          <Link to="/aboutus" className="brand-logo">
             <i className="large material-icons"> pets </i>Mittens
           </Link>
           <div className="right">

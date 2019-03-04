@@ -12,27 +12,10 @@ const AboutUs = () => (
         width="500"
       />
       <p className="rootText">
-        Spicy jalapeno bacon ipsum dolor amet filet mignon velit swine veniam
-        jerky ex beef dolore kevin, exercitation tongue sirloin. Venison
-        landjaeger ex salami turducken brisket prosciutto biltong strip steak
-        buffalo laboris shankle pig minim ball tip. Drumstick meatball salami,
-        strip steak dolore ut mollit tempor kevin dolore laborum non tail corned
-        beef. Pastrami tail tri-tip, officia turducken excepteur rump pancetta
-        anim. Spicy jalapeno bacon ipsum dolor amet filet mignon velit swine
-        veniam jerky ex beef dolore kevin, exercitation tongue sirloin. Venison
-        landjaeger. Ex salami turducken brisket prosciutto biltong strip steak
-        buffalo laboris shankle pig minim ball tip. Drumstick meatball salami,
-        strip steak dolore ut mollit tempor kevin dolore laborum non tail corned
-        beef. Pastrami tail tri-tip, officia turducken excepteur rump pancetta
-        anim. Spicy jalapeno bacon ipsum dolor amet filet mignon velit swine
-        veniam jerky ex beef dolore kevin, exercitation tongue sirloin. Venison
-        landjaeger ex salami turducken brisket prosciutto biltong strip steak
-        buffalo laboris shankle pig minim ball tip. Drumstick meatball salami,
-        strip steak dolore ut mollit tempor kevin dolore laborum non tail corned
-        beef. Pastrami tail tri-tip, officia turducken excepteur rump pancetta
-        anim. Spicy jalapeno bacon ipsum dolor amet filet mignon velit swine
-        veniam jerky ex beef dolore kevin, exercitation tongue sirloin. Venison
-        landjaeger.
+        Welcome to the shop for your pups paws! Whatever the weather, we can
+        outfit your pup with the coolest, warmest, highest, lowest, shiniest
+        booties available. Check out our stock and upgrade your pups mittens
+        with the click of a button!
       </p>
     </div>
     <Link to="/products">

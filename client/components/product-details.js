@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
-import {getProductDetailsThunk, updateQuantity} from '../store/product'
-import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
+import {getProductDetailsThunk} from '../store/product'
+import {addItemToOrderThunk} from '../store/order'
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -14,11 +13,11 @@ class ProductDetails extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const productId = this.props.match.params.productId
-    await this.props.getProductDetails(productId)
-    await this.props.getUserOrderThunkDispatch()
+    this.props.getProductDetailsThunkDispatch(productId)
   }
+
   handleAddToCart() {
     this.props.addItemToOrderThunkDispatch(
       this.props.currentProduct,
@@ -77,7 +76,7 @@ class ProductDetails extends Component {
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
-            all mittens
+            All Mittens
           </button>
         </div>
       </div>
@@ -86,24 +85,18 @@ class ProductDetails extends Component {
 }
 
 const mapState = state => {
-  //console.log('state in mapstatetoprops (in productdetails component): ', state)
   return {
     currentProduct: state.product.product,
-    user: state.user,
-    currentOrder: state.order.myCart,
-    itemsInCart: state.order.itemsInCart
+    currentOrder: state.order.myCart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
-    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
+    getProductDetailsThunkDispatch: productId =>
+      dispatch(getProductDetailsThunk(productId)),
     addItemToOrderThunkDispatch: (item, orderId) =>
-      dispatch(addItemToOrderThunk(item, orderId)),
-
-    updateQuantity: (productId, stock) =>
-      dispatch(updateQuantity(productId, stock))
+      dispatch(addItemToOrderThunk(item, orderId))
   }
 }
 
