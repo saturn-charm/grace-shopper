@@ -3,10 +3,6 @@ const {Order, ItemInOrder} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    // console.log(
-    //   'req.session.passport.user in order get route: ',
-    //   req.session.passport.user
-    // )
     if (req.session.passport) {
       const response = await Order.findOrCreate({
         where: {userId: req.session.passport.user}
@@ -21,12 +17,13 @@ router.get('/', async (req, res, next) => {
       const guestOrder = await Order.create({})
       res.json(guestOrder)
     }
+
   } catch (err) {
     next(err)
   }
 })
 
-//api/itemsInOrder/
+//api/itemsInOrder/:orderId
 router.get('/:orderId', async (req, res, next) => {
   try {
     const orderItems = await ItemInOrder.findAll({
@@ -63,9 +60,11 @@ router.post('/newItem', async (req, res, next) => {
     } else {
       res.json(orderItem)
     }
+
   } catch (err) {
     next(err)
   }
 })
 
 module.exports = router
+

@@ -51,6 +51,7 @@ export const addItemToOrderThunk = (item, orderId) => {
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
+
     } catch (error) {
       console.error(error)
     }
@@ -77,6 +78,7 @@ const reducer = (state = initialState, action) => {
       if (filtered.length > 0) {
         return {...state}
       }
+
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
     }
     default:

@@ -46,6 +46,19 @@ export const getProductDetailsThunk = productId => {
     }
   }
 }
+
+
+export const updateQuantity = (productId, stock) => {
+  return async dispatch => {
+    try {
+      const order = await axios.put(`/api/products/${productId}`, {stock})
+      dispatch(getProductDetails(order.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
