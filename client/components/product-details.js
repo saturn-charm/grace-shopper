@@ -6,31 +6,16 @@ import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
-    this.addQuantity = 1
-    this.orderId = 1
+    this.state = {
+      value: 1
+    }
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.decrease = this.decrease.bind(this)
-    this.increase = this.increase.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getProductDetails(productId)
-  }
-
-  decrease() {
-    const stock = this.props.currentProduct.stock
-    const productId = this.props.currentProduct.id
-    this.props.updateQuantity(productId, stock - 1)
-    let result = this.addQuantity++
-    console.log(result)
-    return result
-  }
-
-  increase() {
-    const stock = this.props.currentProduct.stock
-    const productId = this.props.currentProduct.id
-    this.props.updateQuantity(productId, stock + 1)
   }
 
   handleAddToCart() {
@@ -42,43 +27,58 @@ class ProductDetails extends Component {
     this.props.addItemToOrderThunk(item)
   }
 
+  handleChange(evt) {
+    this.setState({
+      value: evt.target.value
+    })
+  }
+
   render() {
+    var quantities = []
+    for (let i = 1; i <= this.props.currentProduct.stock; i++) {
+      quantities.push(i)
+    }
+    const list = quantities.map(elem => {
+      return (
+        <option key={elem} value={elem}>
+          {elem}
+        </option>
+      )
+    })
+
     return (
-      <div className="center container">
-        <div>
-          <h1 className="detailText">{this.props.currentProduct.name}</h1>
-          <img
-            className="imgDetail"
-            height="400"
-            src={this.props.currentProduct.imageUrl}
-          />
-          <h5>{this.props.currentProduct.description}</h5>
-          <h5>Price: {this.props.currentProduct.price}</h5>
-          <h5>
-            <strong>Quantity: {this.props.currentProduct.stock}</strong>
-          </h5>
+      <div className="container">
+        <img
+          className="imgDetail"
+          height="400"
+          src={this.props.currentProduct.imageUrl}
+        />
+        <h2 className="detailText">{this.props.currentProduct.name}</h2>
+        <h5>{this.props.currentProduct.description}</h5>
+        <h5>Price: ${this.props.currentProduct.price}</h5>
+
+        {/* stock dropdown menu*/}
+        <div className="input-field col s12 left">
+          <select
+            className="browser-default"
+            value={this.state.value}
+            onChange={this.handleChange}
+          >
+            {list}
+          </select>
           <button
-            className="waves-effect waves-light btn-large"
             type="button"
+            className="waves-effect pink lighten-1 btn-large product"
             onClick={this.handleAddToCart}
           >
             Add to cart
           </button>
-
           <button
-            className="waves-effect pink btn-large"
-            type="button"
-            onClick={this.increase}
-          >
-            undo
-          </button>
-
-          <button
-            className="waves-effect waves-light btn-large"
+            className="waves-effect waves-light btn-large product"
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
-            Return to all mittens
+            all mittens
           </button>
         </div>
       </div>
@@ -106,5 +106,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(ProductDetails)
-
-// onClick={this.decrease}

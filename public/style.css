@@ -1,3 +1,8 @@
+/* navbars */
+.brand-logo {
+  font-family: 'Lobster', cursive;
+}
+
 nav a {
   margin-left: 1em;
 }
@@ -8,26 +13,28 @@ nav .badge {
   left: 1400%;
 }
 
+nav i.material-icons {
+  font-size: 42px;
+}
+
+i.material-icons.pink-text.darken-1 {
+  font-size: 30px;
+}
+
+/* ************************************** */
+/* forms */
 form div {
   margin: 1em;
-  display: inline-block;
 }
 
-.rootText {
-  text-align: justify;
-}
-
+/* imgs */
 .responsive-img {
   float: left;
   margin-right: 1em;
 }
 
-nav i.material-icons {
-  font-size: 42px;
-}
-
-.googleLink a {
-  margin-right: 10%;
+.card.horizontal.small .card-image img {
+  height: 80%;
 }
 
 .card-image {
@@ -35,62 +42,73 @@ nav i.material-icons {
   overflow: hidden;
 }
 
-button {
-  margin-bottom: 5%;
-  font-family: 'Laila', serif;
+img.imgDetail {
+  float: right;
+  margin: 0%;
+  padding: 0;
 }
 
-h1,
+/* ************************************** */
+/* text */
+p.rootText {
+  text-align: justify;
+  font-family: 'Arial';
+}
+
+h2,
 h3 {
   font-family: 'Pacifico', cursive;
 }
 
-.brand-logo {
-  font-family: 'Lobster', cursive;
+p {
+  font-family: 'Merienda', cursive;
+  font-size: 18px;
+}
+
+p.product-description {
+  color: black;
+}
+
+span.card-title {
+  color: black;
+}
+
+h2.detailText {
+  margin-bottom: 5%;
+  width: 450px;
 }
 
 h4 {
   font-family: 'Abril Fatface', cursive;
 }
 
-.imgDetail {
-  float: right;
+/* ************************************** */
+/* links/buttins */
+.googleLink a {
+  margin-right: 10%;
+}
+
+button {
+  margin-bottom: 2%;
+  /* font-family: 'Laila', serif; */
 }
 
 .waves-effect {
-  margin-top: 15%;
+  margin-top: 3%;
 }
 
-.detailText {
-  margin-bottom: 10%;
+select.browser-default {
+  width: 20%;
 }
 
-nav i.material-icons {
-  font-size: 42px;
+.product {
+  margin-left: 5px;
+}
+button.waves-effect.pink.lighten-1.btn-large.product,
+.waves-effect.waves-light.btn-large.product {
+  margin-top: 10%;
 }
 
-.googleLink a {
-  margin-right: 10%;
-}
-
-.card-image {
-  height: 400px; /* Your height here */
-  overflow: hidden;
-}
-
-.rootText {
-  text-align: justify;
-}
-
-.responsive-img {
-  float: left;
-  margin-right: 1em;
-}
-
-nav i.material-icons {
-  font-size: 42px;
-}
-
-.googleLink a {
-  margin-right: 10%;
+.orders {
+  margin-top: 1%;
 }

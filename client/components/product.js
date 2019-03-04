@@ -5,20 +5,18 @@ export default function Product(props) {
   return (
     <div className="container">
       <div className="col s12 l6">
-        <div className="card">
+        <div className="card hoverable horizontal small">
           <div className="card-image">
-            <img
-              className="responsive-img"
-              height="350"
-              src={product.imageUrl}
-            />
+            <img className="responsive-img" src={product.imageUrl} />
           </div>
           <div className="card-content">
             <i className="material-icons pink-text pulse small right">
               favorite
             </i>
-            <span className="card-title">{product.name}</span>
-            <p>{product.description}</p>
+            <span className="card-title">
+              <strong>{product.name}</strong>
+            </span>
+            <p className="product-description">{product.description}</p>
           </div>
         </div>
       </div>
