@@ -33,7 +33,6 @@ export const getUserOrderThunk = () => {
     try {
       const orderResponse = await axios.get('/api/orders/myCart')
       const existingOrder = orderResponse.data
-      console.log('EXISTING ORDER', existingOrder)
       const itemsInOrderResponse = await axios.get(
         `/api/orders/myCart/${existingOrder.id}`
       )
