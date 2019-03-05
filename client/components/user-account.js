@@ -7,10 +7,17 @@ import {connect} from 'react-redux'
  */
 export const UserAccount = props => {
   const {email} = props
-
   return (
-    <div>
+    <div className="container">
       <h3>Welcome, {email}</h3>
+      <p>Mittens are waiting for you my friend...</p>
+      <button
+        type="button"
+        className="waves-effect purple lighten-4 btn-large"
+        onClick={() => props.history.push('/products')}
+      >
+        Gimme Some Mittens
+      </button>
     </div>
   )
 }
