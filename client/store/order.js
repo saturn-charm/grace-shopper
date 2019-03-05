@@ -11,6 +11,7 @@ const initialState = {
 const GET_USER_ORDER = 'GET_USER_ORDER'
 const ADD_ITEM_TO_ORDER = 'ADD_ITEM_TO_ORDER'
 const GET_CART_CONTENTS = 'GET_CART_CONTENTS'
+const PURCHASED_ORDER = 'PURCHASED_ORDER'
 
 // ACTION CREATORS
 const getUserOrder = order => ({
@@ -25,6 +26,11 @@ const addItemToOrder = (item, orderId) => ({
 const getCartContents = itemsInOrder => ({
   type: GET_CART_CONTENTS,
   itemsInOrder
+})
+
+const purchasedOrder = orderId => ({
+  type: PURCHASED_ORDER,
+  orderId
 })
 
 // THUNK CREATORS
@@ -52,6 +58,16 @@ export const addItemToOrderThunk = (item, orderId) => {
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const purchasedOrderThunk = order => {
+  return async () => {
+    try {
+      await axios.put('/api/orders', order)
     } catch (error) {
       console.error(error)
     }

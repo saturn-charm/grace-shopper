@@ -26,6 +26,26 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// /api/orders
+router.put('/', async (req, res, next) => {
+  try {
+    await Order.update(
+      {
+        purchased: true
+      },
+      {
+        where: {id: req.body.id},
+        returning: true, // needed for affectedRows to be populated
+        plain: true // returned instances are just plain objects
+      }
+    )
+    console.log('REQ.BODY!!!!!!!!!!!!!!!!!', req.body)
+    res.send('Success')
+  } catch (error) {
+    next(error)
+  }
+})
+
 //the point of this route is to get the quantity of items in an order
 //example: eager loading from above route tells you that you have
 //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
