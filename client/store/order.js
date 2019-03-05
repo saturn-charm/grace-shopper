@@ -51,12 +51,36 @@ export const addItemToOrderThunk = (item, orderId) => {
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
-
+      dispatch(addItemToOrder(orderItem, orderId))
     } catch (error) {
       console.error(error)
     }
   }
 }
+
+export const changeQuantity = (productId, numberOfItems) => {
+  return async dispatch => {
+    try {
+      const response = await axios.put(`/api/orders/${productId}`, {
+        numberOfItems
+      })
+      dispatch(getCartContents(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+//
+//  axios
+//    .put(`api/orders/${id}/quantity`, { quantity })
+//    .then(res => res.data);
+// };
+//
+// export const updateQuantity = (id, quantity) => async dispatch => {
+//   const candy = await changeQuantity(id, quantity);
+//   dispatch(gotOneCandyFromServer(candy));
+// };
 
 // REDUCER
 const reducer = (state = initialState, action) => {

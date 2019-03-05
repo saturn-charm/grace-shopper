@@ -38,6 +38,21 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
+//api/itemsInOrder/:productId <- UPDATE
+router.put('/:productId', async (req, res, next) => {
+  try {
+    console.log('PRODUCT ID, ', req.params.productId)
+    const productId = req.params.productId
+    const product = await ItemInOrder.findById(productId)
+    const updated = await product.update({
+      numberOfItems: req.body.numberOfItems
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/newItem', async (req, res, next) => {
   try {
     const orderItems = await ItemInOrder.findAll({

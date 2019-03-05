@@ -14,7 +14,7 @@ export const UserHome = props => {
       <p>Mittens are waiting for you my friend...</p>
       <button
         type="button"
-        className="waves-effect purple lighten-4 btn-large"
+        className="waves-effect waves-light btn-large"
         onClick={() => props.history.push('/products')}
       >
         Gimme Some Mittens

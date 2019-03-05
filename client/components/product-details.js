@@ -27,8 +27,8 @@ class ProductDetails extends Component {
     )
     let addText
     let value = this.state.value
-    if (value > 1) addText = 'items are added to your card'
-    else addText = 'item is added to your card'
+    if (value > 1) addText = 'items were added to your cart'
+    else addText = 'item was added to your cart'
     this.setState({
       textPopUp: `${value} ${addText}`
     })
