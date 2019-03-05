@@ -99,6 +99,11 @@ button {
 
 select.browser-default {
   width: 20%;
+  margin-bottom: 3%;
+}
+
+select.browser-default.order {
+  width: 110%;
 }
 
 .product {

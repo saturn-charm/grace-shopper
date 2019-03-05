@@ -13,17 +13,47 @@ export class Order extends Component {
 
   render() {
     const productName = this.props.currentOrder.products
-    const name =
+    var quantities = []
+    for (let i = 1; i <= 5; i++) {
+      quantities.push(i)
+    }
+    const list = quantities.map(elem => {
+      return (
+        <option key={elem} value={elem}>
+          {elem}
+        </option>
+      )
+    })
+
+    const nameAndPrice =
       productName &&
       productName.map(product => {
-        return product.name + ' ' + 'price: $' + product.price + ' '
+        let quantity
+        this.props.itemsInCart.map(item => {
+          if (item.productId === product.id) {
+            quantity = item.numberOfItems
+          }
+        })
+        return (
+          <div key={product.id}>
+            <p className="order">
+              <br />
+              <hr />
+              {product.name}, price: ${product.price},<br />
+              Quantity: <br />
+              <div className="input-field col s12 left">
+                <select className="browser-default order">{list}</select>
+              </div>
+              <br />
+            </p>
+          </div>
+        )
       })
-    console.log('ORDER CART, ', this.props.currentOrder)
+    console.log('ORDER CART, ', list)
     return (
       <div className="container">
-        <h1>Hola</h1>
-        <h3>{this.props.user.email}</h3>
-        <h3> Your order: {name}</h3>
+        <h4>Your Shopping Cart ({this.props.user.email})</h4>
+        {nameAndPrice}
       </div>
     )
   }
