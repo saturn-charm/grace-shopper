@@ -7,7 +7,8 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 1
+      value: 1,
+      textPopUp: ''
     }
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -23,6 +24,13 @@ class ProductDetails extends Component {
       this.props.currentProduct,
       this.props.currentOrder.id
     )
+    let addText
+    let value = this.state.value
+    if (value > 1) addText = 'items are added to your card'
+    else addText = 'item is added to your card'
+    this.setState({
+      textPopUp: `${value} ${addText}`
+    })
   }
 
   handleChange(evt) {
@@ -32,10 +40,13 @@ class ProductDetails extends Component {
   }
 
   render() {
+    const stock = this.props.currentProduct.stock
+
     var quantities = []
-    for (let i = 1; i <= this.props.currentProduct.stock; i++) {
+    for (let i = 1; i <= stock; i++) {
       quantities.push(i)
     }
+
     const list = quantities.map(elem => {
       return (
         <option key={elem} value={elem}>
@@ -54,6 +65,7 @@ class ProductDetails extends Component {
         <h2 className="detailText">{this.props.currentProduct.name}</h2>
         <h5>{this.props.currentProduct.description}</h5>
         <h5>Price: ${this.props.currentProduct.price}</h5>
+        <p className="pink-text">{this.state.textPopUp}</p>
 
         {/* stock dropdown menu*/}
         <div className="input-field col s12 left">
