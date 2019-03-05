@@ -40,7 +40,7 @@ export const getUserOrderThunk = () => {
       if (!existingOrder.guestCart || !existingOrder.itemsInOrder) {
         //if there is no guestcart on existingOrder, meaning we are either logged in or haven't initialized a cart
         const itemsInOrderResponse = await axios.get(
-          `/api/orders/${existingOrder.id}`
+          `/api/orders/myCart/${existingOrder.id}`
         )
         const stuffInCartAlready = itemsInOrderResponse.data
         dispatch(getUserOrder(existingOrder))
@@ -54,7 +54,10 @@ export const getUserOrderThunk = () => {
 export const addItemToOrderThunk = (item, orderId) => {
   return async dispatch => {
     try {
-      const response = await axios.post('/api/orders/newItem', [item, orderId])
+      const response = await axios.post('/api/orders/myCart/newItem', [
+        item,
+        orderId
+      ])
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))

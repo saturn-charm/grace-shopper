@@ -31,7 +31,7 @@ router.get('/myCart', async (req, res, next) => {
 })
 
 //api/orders/:orderId
-router.get('/:orderId', async (req, res, next) => {
+router.get('/myCart/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport) {
       console.log('GETTING ITEMS from ORDER ') //the point of this route is to get the quantity of items in an order
@@ -49,7 +49,7 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
-router.post('/newItem', async (req, res, next) => {
+router.post('/myCart/newItem', async (req, res, next) => {
   try {
     const orderItem = await ItemInOrder.find({
       where: {
