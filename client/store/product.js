@@ -1,11 +1,4 @@
 import axios from 'axios'
-import history from '../history'
-
-// INITIAL STATE
-const initialState = {
-  products: [],
-  product: {}
-}
 
 // ACTION TYPES
 const GET_PRODUCTS_FROM_SERVER = 'GET_PRODUCTS_FROM_SERVER'
@@ -17,9 +10,9 @@ const getProductsFromServer = products => ({
   products
 })
 
-const getProductDetails = productId => ({
+const getProductDetails = product => ({
   type: GET_PRODUCT_DETAILS,
-  productId
+  product
 })
 
 // THUNK CREATORS
@@ -30,7 +23,7 @@ export const getProductsThunk = () => {
       const products = response.data
       dispatch(getProductsFromServer(products))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -42,21 +35,26 @@ export const getProductDetailsThunk = productId => {
       const product = response.data
       dispatch(getProductDetails(product))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
 
-
-export const updateQuantity = (productId, stock) => {
+export const updateQuantityThunk = (productId, stock) => {
   return async dispatch => {
     try {
       const order = await axios.put(`/api/products/${productId}`, {stock})
       dispatch(getProductDetails(order.data))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
+}
+
+// INITIAL STATE
+const initialState = {
+  products: [],
+  product: {}
 }
 
 // REDUCER
@@ -66,7 +64,7 @@ const reducer = (state = initialState, action) => {
       return {...state, products: action.products}
     }
     case GET_PRODUCT_DETAILS: {
-      return {...state, product: action.productId}
+      return {...state, product: action.product}
     }
     default:
       return state

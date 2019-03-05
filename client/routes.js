@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 import {me} from './store'
 
 import {
+  Home,
+  AllProducts,
   Login,
   Signup,
-  UserHome,
-  AllProducts,
+  Order,
   ProductDetails,
-  AboutUs,
-  Order
+  UserAccount
 } from './components'
 
 /**
@@ -20,7 +20,6 @@ import {
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    //console.log('props in Routes: ', this.props)
   }
 
   render() {
@@ -30,14 +29,14 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/aboutUs" component={AboutUs} />
+        <Route exact path="/home" component={Home} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={ProductDetails} />
         <Route exact path="/orders" component={Order} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/myaccount" component={UserAccount} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -51,7 +50,6 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  //console.log('state in mapstate on routes comp: ', state)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey

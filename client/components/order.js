@@ -51,7 +51,6 @@ export class Order extends Component {
           </div>
         )
       })
-    console.log('ORDER CART, ', this.props.currentOrder)
     return (
       <div className="container">
         <h4>Your Shopping Cart ({this.props.user.email})</h4>
@@ -68,11 +67,10 @@ export class Order extends Component {
   }
 }
 
-const mapStatetoProps = state => {
+const mapState = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart,
-    itemsInCart: state.order.itemsInOrder
+    currentOrder: state.order.myCart
   }
 }
 
@@ -82,4 +80,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatch)(Order)
+export default connect(mapState, mapDispatch)(Order)

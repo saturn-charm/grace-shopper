@@ -69,6 +69,9 @@ p.product-description {
   color: black;
 }
 
+p.pink-text {
+  font-size: 26px;
+}
 span.card-title {
   color: black;
 }
@@ -119,6 +122,6 @@ button.waves-effect.pink.lighten-1.btn-large.product,
   margin-top: 8%;
 }
 
-.orders {
+.btn-floating.z-depth-0.white.right {
   margin-top: 1%;
 }
