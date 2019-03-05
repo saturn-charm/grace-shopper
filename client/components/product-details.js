@@ -16,10 +16,10 @@ class ProductDetails extends Component {
 
   componentDidMount() {
     const productId = this.props.match.params.productId
+
     this.props.getProductDetailsThunkDispatch(productId)
     this.props.getUserOrderThunkDispatch()
   }
-
   handleAddToCart() {
     console.log(
       "in handleaddtocart, here's this.state.value: ",
@@ -30,6 +30,7 @@ class ProductDetails extends Component {
       this.props.currentOrder.id,
       this.state.value
     )
+
     let addText
     let value = this.state.value
     if (value > 1) addText = 'items are added to your cart'
