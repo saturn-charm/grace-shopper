@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 import {me} from './store'
 
 import {
-  AboutUs,
+  Home,
   AllProducts,
   Login,
   Signup,
   Order,
   ProductDetails,
-  UserHome
+  UserAccount
 } from './components'
 
 /**
@@ -29,14 +29,14 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/aboutus" component={AboutUs} />
+        <Route exact path="/home" component={Home} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={ProductDetails} />
         <Route exact path="/orders" component={Order} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/userhome" component={UserHome} />
+            <Route path="/useraccount" component={userAccount} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

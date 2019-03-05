@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const AboutUs = () => (
+const Home = () => (
   <div className="container">
     <h4 className="center">WE'VE GOT YOUR DOG'S PAWS COVERED </h4>
     <div>
@@ -28,4 +28,4 @@ const AboutUs = () => (
   </div>
 )
 
-export default AboutUs
+export default Home
