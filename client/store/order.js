@@ -33,6 +33,7 @@ export const getUserOrderThunk = () => {
     try {
       const orderResponse = await axios.get('/api/orders')
       const existingOrder = orderResponse.data
+      console.log('EXISTING ORDER', existingOrder)
       const itemsInOrderResponse = await axios.get(
         `/api/orders/${existingOrder.id}`
       )
@@ -51,7 +52,6 @@ export const addItemToOrderThunk = (item, orderId) => {
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
-
     } catch (error) {
       console.error(error)
     }

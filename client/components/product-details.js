@@ -33,6 +33,7 @@ class ProductDetails extends Component {
   }
 
   render() {
+    console.log('THIS.PROPS', this.props)
     var quantities = []
     for (let i = 1; i <= this.props.currentProduct.stock; i++) {
       quantities.push(i)

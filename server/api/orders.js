@@ -1,9 +1,11 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
+// api/orders
 router.get('/', async (req, res, next) => {
   try {
     if (req.session.passport) {
+      // console.log('req.session.passport', req.session)
       const response = await Order.findOrCreate({
         //what if a user has multiple un-purchased orders?
         where: {userId: req.session.passport.user},
@@ -24,15 +26,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//api/orders/:orderId
+//the point of this route is to get the quantity of items in an order
+//example: eager loading from above route tells you that you have
+//dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
+// api/orders/:orderId
+//includes quantity and historical price information
 router.get('/:orderId', async (req, res, next) => {
   try {
-    console.log('GETTIBG ITEMS from ORDER ') //the point of this route is to get the quantity of items in an order
+    console.log('GETTIBG ITEMS from ORDER ')
     const orderItems = await ItemInOrder.findAll({
-      //example: eager loading from above route tells you that you have
       where: {
-        //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
-        orderId: req.params.orderId //includes quantity and historical price information
+        orderId: req.params.orderId
       }
     })
     res.json(orderItems)
@@ -41,6 +45,7 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
+// api/orders/newItem
 router.post('/newItem', async (req, res, next) => {
   try {
     const orderItem = await ItemInOrder.find({
