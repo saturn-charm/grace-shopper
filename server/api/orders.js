@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
-//api/orders
-router.get('/', async (req, res, next) => {
+//api/orders/myCart
+router.get('/myCart', async (req, res, next) => {
   try {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
@@ -12,9 +12,15 @@ router.get('/', async (req, res, next) => {
       })
       res.json(response[0])
     } else {
-      console.log('no user on session')
-      const guestOrder = await Order.create({})
-      res.json(guestOrder)
+      //console.log('no user on session, sending back a guest cart')
+      if (!req.session.guestCart) {
+        req.session.guestCart = {}
+      }
+      if (!req.session.itemsInOrder) {
+        req.session.itemsInOrder = []
+      }
+      //console.log('heres req.session before sending back the guest cart: ', req.session)
+      res.json(req.session)
     }
   } catch (err) {
     next(err)
@@ -22,24 +28,26 @@ router.get('/', async (req, res, next) => {
 })
 
 //api/orders/:orderId
-router.get('/:orderId', async (req, res, next) => {
+router.get('/myCart/:orderId', async (req, res, next) => {
   try {
-    //the point of this route is to get the quantity of items in an order
-    const orderItems = await ItemInOrder.findAll({
-      //example: eager loading from above route tells you that you have
-      where: {
-        //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
-        orderId: req.params.orderId //includes quantity and historical price information
-      }
-    })
-    res.json(orderItems)
+    if (req.session.passport) {
+      //the point of this route is to get the quantity of items in an order
+      const orderItems = await ItemInOrder.findAll({
+        //example: eager loading from above route tells you that you have
+        where: {
+          //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
+          orderId: req.params.orderId //includes quantity and historical price information
+        }
+      })
+      res.json(orderItems)
+    }
   } catch (error) {
     next(error)
   }
 })
 
 //api/orders/newItem
-router.post('/newItem', async (req, res, next) => {
+router.post('/myCart/newItem', async (req, res, next) => {
   try {
     const orderItem = await ItemInOrder.find({
       where: {
