@@ -15,13 +15,14 @@ export class Order extends Component {
   handleCheckout() {}
   render() {
     const productName = this.props.currentOrder.products
-    
+    const itemsInCart = this.props.currentOrder.products
+
     let list
     const nameAndPrice =
       productName &&
       productName.map(product => {
         let quantity
-        this.props.itemsInCart.map(item => {
+        itemsInCart.map(item => {
           if (item.productId === product.id) {
             quantity = item.numberOfItems
           }
