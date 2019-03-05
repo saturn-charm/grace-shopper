@@ -41,7 +41,6 @@ class ProductDetails extends Component {
   }
 
   render() {
-    console.log('VALUE ', this.state.value)
     const stock = this.props.currentProduct.stock
 
     var quantities = []
