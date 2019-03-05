@@ -8,7 +8,6 @@ export class Order extends Component {
     this.handleCheckout = this.handleCheckout.bind(this)
   }
 
-class Order extends Component {
   componentDidMount() {
     this.props.getUserOrderThunkDispatch()
   }
