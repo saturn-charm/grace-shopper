@@ -1,13 +1,18 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import axios from 'axios'
 import user from './user'
 import product from './product'
 import order from './order'
 
 const reducer = combineReducers({user, product, order})
 const middleware = composeWithDevTools(
-  applyMiddleware(createLogger({collapsed: true}))
+  applyMiddleware(
+    thunkMiddleware.withExtraArgument({axios}),
+    createLogger({collapsed: true})
+  )
 )
 const store = createStore(reducer, middleware)
 
