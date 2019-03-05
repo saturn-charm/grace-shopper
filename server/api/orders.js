@@ -38,6 +38,7 @@ router.put('/myCart', async (req, res, next) => {
         plain: true
       }
     )
+    res.send('Success')
   } catch (error) {
     next(error)
   }

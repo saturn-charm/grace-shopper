@@ -4,6 +4,7 @@ import axios from 'axios'
 const GET_USER_ORDER = 'GET_USER_ORDER'
 const ADD_ITEM_TO_ORDER = 'ADD_ITEM_TO_ORDER'
 const GET_CART_CONTENTS = 'GET_CART_CONTENTS'
+const PURCHASED_ORDER = 'PURCHASED_ORDER'
 
 // ACTION CREATORS
 const getUserOrder = order => ({
@@ -20,6 +21,10 @@ const addItemToOrder = (item, orderId) => ({
 const getCartContents = itemsInOrder => ({
   type: GET_CART_CONTENTS,
   itemsInOrder
+})
+
+const purchasedOrder = () => ({
+  type: PURCHASED_ORDER
 })
 
 // THUNK CREATORS
@@ -63,9 +68,10 @@ export const addItemToOrderThunk = (item, orderId) => {
 }
 
 export const purchasedOrderThunk = order => {
-  return async () => {
+  return async dispatch => {
     try {
       await axios.put('/api/orders/myCart', order)
+      dispatch(purchasedOrder())
     } catch (error) {
       console.error(error)
     }
@@ -97,6 +103,9 @@ const reducer = (state = initialState, action) => {
         return {...state}
       }
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
+    }
+    case PURCHASED_ORDER: {
+      return {...state, myCart: {}, itemsInOrder: []}
     }
     default:
       return state
