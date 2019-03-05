@@ -43,7 +43,7 @@ router.put('/myCart', async (req, res, next) => {
   }
 })
 
-//api/orders/:orderId
+//api/orders/mycart/:orderId
 router.get('/myCart/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport) {

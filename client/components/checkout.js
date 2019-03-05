@@ -14,7 +14,6 @@ class Checkout extends Component {
 
   handlePurchase() {
     const order = this.props.userOrder
-    // console.log('heree', order)
     this.props.puchaseOrderThunkDispatch(order)
   }
 

@@ -30,7 +30,7 @@ export const getUserOrderThunk = () => {
       const existingOrder = orderResponse.data
       console.log('EXISTING ORDER', existingOrder)
       const itemsInOrderResponse = await axios.get(
-        `/api/orders/${existingOrder.id}`
+        `/api/orders/myCart/${existingOrder.id}`
       )
       if (!existingOrder.guestCart || !existingOrder.itemsInOrder) {
         //if there is no guestcart on existingOrder, meaning we are either logged in or haven't initialized a cart
@@ -65,7 +65,7 @@ export const addItemToOrderThunk = (item, orderId) => {
 export const purchasedOrderThunk = order => {
   return async () => {
     try {
-      await axios.put('/api/orders', order)
+      await axios.put('/api/orders/myCart', order)
     } catch (error) {
       console.error(error)
     }

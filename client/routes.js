@@ -11,7 +11,8 @@ import {
   Signup,
   Order,
   ProductDetails,
-  UserAccount
+  UserAccount,
+  Checkout
 } from './components'
 
 /**
@@ -37,6 +38,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/myaccount" component={UserAccount} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
