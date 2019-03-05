@@ -51,7 +51,6 @@ export class Order extends Component {
           </div>
         )
       })
-    console.log('ORDER CART, ', this.props.currentOrder)
     return (
       <div className="container">
         <h4>Your Shopping Cart ({this.props.user.email})</h4>
