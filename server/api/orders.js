@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
-
 //api/orders/myCart
 router.get('/myCart', async (req, res, next) => {
   try {
@@ -46,11 +45,12 @@ router.get('/myCart/:orderId', async (req, res, next) => {
 
 router.post('/myCart/newItem', async (req, res, next) => {
   try {
+    console.log('req.body: ', req.body)
     const newItemInOrder = {
       productId: req.body[0].id,
       orderId: req.body[1],
-      numberOfItems: 1,
-      purchaseTotal: req.body[0].price
+      numberOfItems: Number(req.body[2]),
+      purchaseTotal: req.body[0].price * req.body[2]
     }
     if (req.session.passport) {
       //if there is a logged in user, interact with database

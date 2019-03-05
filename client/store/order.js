@@ -46,15 +46,16 @@ export const getUserOrderThunk = () => {
     }
   }
 }
-export const addItemToOrderThunk = (item, orderId) => {
+export const addItemToOrderThunk = (item, orderId, quantity) => {
   return async dispatch => {
     try {
       const response = await axios.post('/api/orders/myCart/newItem', [
         item,
-        orderId
+        orderId,
+        quantity
       ])
       const orderItem = response.data
-      dispatch(addItemToOrder(orderItem, orderId))
+      dispatch(addItemToOrder(orderItem, orderId, quantity))
     } catch (error) {
       console.error(error)
     }
