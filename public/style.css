@@ -109,9 +109,14 @@ select.browser-default.order {
 .product {
   margin-left: 5px;
 }
+
 button.waves-effect.pink.lighten-1.btn-large.product,
 .waves-effect.waves-light.btn-large.product {
   margin-top: 10%;
+}
+
+.waves-effect.purple.lighten-4.btn-large {
+  margin-top: 8%;
 }
 
 .orders {

@@ -5,26 +5,17 @@ import {getUserOrderThunk} from '../store/order'
 export class Order extends Component {
   constructor(props) {
     super(props)
+    this.handleCheckout = this.handleCheckout.bind(this)
   }
 
   componentDidMount() {
     this.props.getUserOrderThunkDispatch()
   }
 
+  handleCheckout() {}
   render() {
     const productName = this.props.currentOrder.products
-    var quantities = []
-    for (let i = 1; i <= 5; i++) {
-      quantities.push(i)
-    }
-    const list = quantities.map(elem => {
-      return (
-        <option key={elem} value={elem}>
-          {elem}
-        </option>
-      )
-    })
-
+    let list
     const nameAndPrice =
       productName &&
       productName.map(product => {
@@ -33,6 +24,17 @@ export class Order extends Component {
           if (item.productId === product.id) {
             quantity = item.numberOfItems
           }
+          var quantities = []
+          for (let i = quantity; i <= product.stock; i++) {
+            quantities.push(i)
+          }
+          list = quantities.map(elem => {
+            return (
+              <option key={elem} value={elem}>
+                {elem}
+              </option>
+            )
+          })
         })
         return (
           <div key={product.id}>
@@ -49,11 +51,18 @@ export class Order extends Component {
           </div>
         )
       })
-    console.log('ORDER CART, ', list)
+    console.log('ORDER CART, ', this.props.currentOrder)
     return (
       <div className="container">
         <h4>Your Shopping Cart ({this.props.user.email})</h4>
         {nameAndPrice}
+        <button
+          type="button"
+          className="waves-effect purple lighten-4 btn-large"
+          onClick={this.handleCheckout}
+        >
+          Checkout
+        </button>
       </div>
     )
   }
