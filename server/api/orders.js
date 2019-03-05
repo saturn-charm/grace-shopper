@@ -7,7 +7,7 @@ router.get('/myCart', async (req, res, next) => {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
         //what if a user has multiple un-purchased orders?
-        where: {userId: req.session.passport.user},
+        where: {userId: req.session.passport.user, purchased: false},
         include: [{model: Product}]
       })
       res.json(response[0])
