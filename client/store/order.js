@@ -31,14 +31,21 @@ const getCartContents = itemsInOrder => ({
 export const getUserOrderThunk = () => {
   return async dispatch => {
     try {
-      const orderResponse = await axios.get('/api/orders')
+      const orderResponse = await axios.get('/api/orders/myCart')
       const existingOrder = orderResponse.data
-      const itemsInOrderResponse = await axios.get(
-        `/api/orders/${existingOrder.id}`
+      console.log(
+        '!!!!!!!!!existingOrder at beginning of combo thunk',
+        existingOrder
       )
-      const stuffInCartAlready = itemsInOrderResponse.data
-      dispatch(getUserOrder(existingOrder))
-      dispatch(getCartContents(stuffInCartAlready))
+      if (!existingOrder.guestCart || !existingOrder.itemsInOrder) {
+        //if there is no guestcart on existingOrder, meaning we are either logged in or haven't initialized a cart
+        const itemsInOrderResponse = await axios.get(
+          `/api/orders/myCart/${existingOrder.id}`
+        )
+        const stuffInCartAlready = itemsInOrderResponse.data
+        dispatch(getUserOrder(existingOrder))
+        dispatch(getCartContents(stuffInCartAlready))
+      }
     } catch (error) {
       console.error(error)
     }
@@ -47,11 +54,13 @@ export const getUserOrderThunk = () => {
 export const addItemToOrderThunk = (item, orderId) => {
   return async dispatch => {
     try {
-      const response = await axios.post('/api/orders/newItem', [item, orderId])
+      const response = await axios.post('/api/orders/myCart/newItem', [
+        item,
+        orderId
+      ])
       const orderItem = response.data
       console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
-
     } catch (error) {
       console.error(error)
     }
