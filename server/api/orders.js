@@ -25,6 +25,24 @@ router.get('/myCart', async (req, res, next) => {
   }
 })
 
+//api/orders/myCart
+router.put('/myCart', async (req, res, next) => {
+  try {
+    await Order.update(
+      {
+        purchased: true
+      },
+      {
+        where: {id: req.body.id},
+        returning: true,
+        plain: true
+      }
+    )
+  } catch (error) {
+    next(error)
+  }
+})
+
 //api/orders/:orderId
 router.get('/myCart/:orderId', async (req, res, next) => {
   try {
