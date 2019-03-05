@@ -14,7 +14,7 @@ describe('Order routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/orders/', () => {
+  describe('/api/orders/myCart', () => {
     let product1, user1, itemInOrder1, order1
     const orderPurchased = false
 
@@ -42,7 +42,7 @@ describe('Order routes', () => {
       })
     })
 
-    it('GET /api/orders', async () => {
+    it('GET /api/orders/myCart', async () => {
       const res = await request(app)
         .get('/api/orders')
         .expect(200)
