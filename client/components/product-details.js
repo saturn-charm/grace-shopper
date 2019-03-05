@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProductDetailsThunk} from '../store/product'
+import {getProductDetailsThunk, getUserOrderThunk} from '../store/product'
 import {addItemToOrderThunk} from '../store/order'
 
 class ProductDetails extends Component {
@@ -26,14 +26,15 @@ class ProductDetails extends Component {
     )
     let addText
     let value = this.state.value
-    if (value > 1) addText = 'items are added to your card'
-    else addText = 'item is added to your card'
+    if (value > 1) addText = 'items are added to your cart'
+    else addText = 'item is added to your cart'
     this.setState({
       textPopUp: `${value} ${addText}`
     })
   }
 
   handleChange(evt) {
+    console.log('in handlechange: ', evt.target.value)
     this.setState({
       value: evt.target.value
     })
@@ -105,7 +106,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
+    getProductDetailsThunkDispatch: productId =>
+      dispatch(getProductDetailsThunk(productId)),
 
     getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
 
