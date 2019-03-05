@@ -69,6 +69,9 @@ p.product-description {
   color: black;
 }
 
+p.pink-text {
+  font-size: 26px;
+}
 span.card-title {
   color: black;
 }

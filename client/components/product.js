@@ -23,7 +23,3 @@ export default function Product(props) {
     </div>
   )
 }
-
-//  <div className="listed-product-text">
-// <p className="listed-product-name">{product.name}</p>
-// <p className="listed-product-price">{product.price}</p>
