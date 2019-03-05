@@ -9,8 +9,8 @@ class AllProducts extends Component {
     super(props)
   }
 
-  async componentDidMount() {
-    await this.props.getProductsThunkDispatch()
+  componentDidMount() {
+    this.props.getProductsThunkDispatch()
   }
 
   render() {
@@ -32,12 +32,12 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   products: state.product.products
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatch = dispatch => ({
   getProductsThunkDispatch: () => dispatch(getProductsThunk())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapState, mapDispatch)(AllProducts)

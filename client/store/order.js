@@ -1,11 +1,4 @@
 import axios from 'axios'
-import history from '../history'
-
-// INITIAL STATE
-const initialState = {
-  myCart: {},
-  itemsInOrder: []
-}
 
 // ACTION TYPES
 const GET_USER_ORDER = 'GET_USER_ORDER'
@@ -17,11 +10,13 @@ const getUserOrder = order => ({
   type: GET_USER_ORDER,
   order
 })
+
 const addItemToOrder = (item, orderId) => ({
   type: ADD_ITEM_TO_ORDER,
   item,
   orderId
 })
+
 const getCartContents = itemsInOrder => ({
   type: GET_CART_CONTENTS,
   itemsInOrder
@@ -59,12 +54,17 @@ export const addItemToOrderThunk = (item, orderId) => {
         orderId
       ])
       const orderItem = response.data
-      console.log("HERE'S THE ORDERITEM: ", orderItem)
       dispatch(addItemToOrder(orderItem, orderId))
     } catch (error) {
       console.error(error)
     }
   }
+}
+
+// INITIAL STATE
+const initialState = {
+  myCart: {},
+  itemsInOrder: []
 }
 
 // REDUCER
@@ -77,7 +77,6 @@ const reducer = (state = initialState, action) => {
       return {...state, itemsInOrder: action.itemsInOrder}
     }
     case ADD_ITEM_TO_ORDER: {
-      console.log('itemsinorder from state: ', state.itemsInOrder)
       const filtered = state.itemsInOrder.filter(
         item =>
           item.orderId === action.item.orderId &&
@@ -86,7 +85,6 @@ const reducer = (state = initialState, action) => {
       if (filtered.length > 0) {
         return {...state}
       }
-
       return {...state, itemsInOrder: [...state.itemsInOrder, action.item]}
     }
     default:

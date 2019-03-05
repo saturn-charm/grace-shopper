@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
+
+//api/orders/myCart
 router.get('/myCart', async (req, res, next) => {
   try {
     if (req.session.passport) {
@@ -28,12 +30,11 @@ router.get('/myCart', async (req, res, next) => {
 router.get('/myCart/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport) {
-      console.log('GETTING ITEMS from ORDER ') //the point of this route is to get the quantity of items in an order
+      //the point of this route is to get the quantity of items in an order
       const orderItems = await ItemInOrder.findAll({
-        //example: eager loading from above route tells you that you have
+        //example: eager loading from above route tells you that you have dog sneakers in your cart, but not how many. this route returns ItemInOrder, which includes quantity and historical price information
         where: {
-          //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
-          orderId: req.params.orderId //includes quantity and historical price information
+          orderId: req.params.orderId
         }
       })
       res.json(orderItems)

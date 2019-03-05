@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, ItemInOrder} = require('../db/models')
+const {Product} = require('../db/models')
 
 // api/products
 router.get('/', async (req, res, next) => {
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// product details
+// api/products/:productId
 router.get('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
@@ -24,6 +24,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
+//api/products/:productId
 router.put('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
