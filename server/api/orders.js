@@ -9,20 +9,14 @@ router.get('/myCart', async (req, res, next) => {
         where: {userId: req.session.passport.user},
         include: [{model: Product}]
       })
-      console.log(
-        'response from findorcreate in get route for order: ',
-        response[1]
-      )
       res.json(response[0])
     } else {
-      //console.log('no user on session, sending back a guest cart')
       if (!req.session.guestCart) {
         req.session.guestCart = {}
       }
       if (!req.session.itemsInOrder) {
         req.session.itemsInOrder = []
       }
-      //console.log('heres req.session before sending back the guest cart: ', req.session)
       res.json(req.session)
     }
   } catch (err) {
@@ -51,26 +45,40 @@ router.get('/myCart/:orderId', async (req, res, next) => {
 
 router.post('/myCart/newItem', async (req, res, next) => {
   try {
-    const orderItem = await ItemInOrder.find({
-      where: {
-        productId: req.body[0].id,
-        orderId: req.body[1]
-      }
-    })
-    if (!orderItem) {
-      console.log(
-        "~~~~~~~~~~~~~~~~didn't find exisitng orderitem, making new one~~~~~~~~~~~~~~~~~~~",
-        req.body
-      )
-      const newOrderItem = await ItemInOrder.create({
-        productId: req.body[0].id,
-        orderId: req.body[1],
-        numberOfItems: 1,
-        purchaseTotal: req.body[0].price
+    const newItemInOrder = {
+      productId: req.body[0].id,
+      orderId: req.body[1],
+      numberOfItems: 1,
+      purchaseTotal: req.body[0].price
+    }
+    if (req.session.passport) {
+      //if there is a logged in user, interact with database
+      const orderItem = await ItemInOrder.find({
+        where: {
+          productId: req.body[0].id,
+          orderId: req.body[1]
+        }
       })
-      res.json(newOrderItem)
+      if (!orderItem) {
+        const newOrderItem = await ItemInOrder.create(newItemInOrder)
+        res.json(newOrderItem)
+      } else {
+        res.json(orderItem)
+      }
+    } else if (
+      req.session.itemsInOrder.some(
+        //checking to see if the new item is already in our cart
+        orderItem =>
+          orderItem.productId === newItemInOrder.productId &&
+          orderItem.orderId === newItemInOrder.orderId
+      )
+    ) {
+      console.log(
+        'this is where logic for increasing quantity or greying out add to cart button goes'
+      )
     } else {
-      res.json(orderItem)
+      req.session.itemsInOrder.push(newItemInOrder)
+      res.json(newItemInOrder)
     }
   } catch (err) {
     next(err)

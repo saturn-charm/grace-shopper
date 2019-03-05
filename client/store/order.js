@@ -78,7 +78,6 @@ const reducer = (state = initialState, action) => {
     }
     case ADD_ITEM_TO_ORDER: {
       console.log('itemsinorder from state: ', state.itemsInOrder)
-      console.log('item from action', action.item)
       const filtered = state.itemsInOrder.filter(
         item =>
           item.orderId === action.item.orderId &&
