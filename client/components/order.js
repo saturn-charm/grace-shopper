@@ -15,6 +15,7 @@ export class Order extends Component {
   handleCheckout() {}
   render() {
     const productName = this.props.currentOrder.products
+    
     let list
     const nameAndPrice =
       productName &&
@@ -24,6 +25,7 @@ export class Order extends Component {
           if (item.productId === product.id) {
             quantity = item.numberOfItems
           }
+
           var quantities = []
           for (let i = quantity; i <= product.stock; i++) {
             quantities.push(i)
@@ -51,6 +53,7 @@ export class Order extends Component {
           </div>
         )
       })
+
     return (
       <div className="container">
         <h4>Your Shopping Cart ({this.props.user.email})</h4>
