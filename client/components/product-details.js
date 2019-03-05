@@ -1,43 +1,54 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
-import {getProductDetailsThunk, updateQuantity} from '../store/product'
-import {getUserOrderThunk, addItemToOrderThunk} from '../store/order'
+import {getProductDetailsThunk, getUserOrderThunk} from '../store/product'
+import {addItemToOrderThunk} from '../store/order'
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 1
+      value: 1,
+      textPopUp: ''
     }
-
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const productId = this.props.match.params.productId
-    await this.props.getProductDetails(productId)
-    await this.props.getUserOrderThunkDispatch()
+
+    this.props.getProductDetailsThunkDispatch(productId)
   }
   handleAddToCart() {
     this.props.addItemToOrderThunkDispatch(
       this.props.currentProduct,
       this.props.currentOrder.id
     )
+
+    let addText
+    let value = this.state.value
+    if (value > 1) addText = 'items are added to your cart'
+    else addText = 'item is added to your cart'
+    this.setState({
+      textPopUp: `${value} ${addText}`
+    })
   }
 
   handleChange(evt) {
+    console.log('in handlechange: ', evt.target.value)
     this.setState({
       value: evt.target.value
     })
   }
 
   render() {
+    const stock = this.props.currentProduct.stock
+
     var quantities = []
-    for (let i = 1; i <= this.props.currentProduct.stock; i++) {
+    for (let i = 1; i <= stock; i++) {
       quantities.push(i)
     }
+
     const list = quantities.map(elem => {
       return (
         <option key={elem} value={elem}>
@@ -56,6 +67,7 @@ class ProductDetails extends Component {
         <h2 className="detailText">{this.props.currentProduct.name}</h2>
         <h5>{this.props.currentProduct.description}</h5>
         <h5>Price: ${this.props.currentProduct.price}</h5>
+        <p className="pink-text">{this.state.textPopUp}</p>
 
         {/* stock dropdown menu*/}
         <div className="input-field col s12 left">
@@ -78,7 +90,7 @@ class ProductDetails extends Component {
             type="button"
             onClick={() => this.props.history.push('/products')}
           >
-            all mittens
+            All Mittens
           </button>
         </div>
       </div>
@@ -87,19 +99,19 @@ class ProductDetails extends Component {
 }
 
 const mapState = state => {
-  console.log('state in mapstatetoprops (in productdetails component): ', state)
   return {
     currentProduct: state.product.product,
-    user: state.user,
-    currentOrder: state.order.myCart,
-    itemsInCart: state.order.itemsInCart
+    currentOrder: state.order.myCart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getProductDetails: productId => dispatch(getProductDetailsThunk(productId)),
+    getProductDetailsThunkDispatch: productId =>
+      dispatch(getProductDetailsThunk(productId)),
+
     getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
+
     addItemToOrderThunkDispatch: (item, orderId) =>
       dispatch(addItemToOrderThunk(item, orderId))
   }

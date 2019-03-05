@@ -2,71 +2,86 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getUserOrderThunk} from '../store/order'
 
-class Order extends Component {
-  componentDidMount() {
-    this.props.getUserOrderThunk()
+export class Order extends Component {
+  constructor(props) {
+    super(props)
+    this.handleCheckout = this.handleCheckout.bind(this)
   }
 
+class Order extends Component {
+  componentDidMount() {
+    this.props.getUserOrderThunkDispatch()
+  }
+
+  handleCheckout() {}
   render() {
+    const productName = this.props.currentOrder.products
+    
+    let list
+    const nameAndPrice =
+      productName &&
+      productName.map(product => {
+        let quantity
+        this.props.itemsInCart.map(item => {
+          if (item.productId === product.id) {
+            quantity = item.numberOfItems
+          }
+
+          var quantities = []
+          for (let i = quantity; i <= product.stock; i++) {
+            quantities.push(i)
+          }
+          list = quantities.map(elem => {
+            return (
+              <option key={elem} value={elem}>
+                {elem}
+              </option>
+            )
+          })
+        })
+        return (
+          <div key={product.id}>
+            <p className="order">
+              <br />
+              <hr />
+              {product.name}, price: ${product.price},<br />
+              Quantity: <br />
+              <div className="input-field col s12 left">
+                <select className="browser-default order">{list}</select>
+              </div>
+              <br />
+            </p>
+          </div>
+        )
+      })
+
     return (
       <div className="container">
-        <h1>Hola</h1>
-        <h3>{this.props.user.email}</h3>
-        <h3>Your order: {this.props.currentProduct.name}</h3>
+        <h4>Your Shopping Cart ({this.props.user.email})</h4>
+        {nameAndPrice}
+        <button
+          type="button"
+          className="waves-effect purple lighten-4 btn-large"
+          onClick={this.handleCheckout}
+        >
+          Checkout
+        </button>
       </div>
     )
   }
 }
 
-const mapPropToCart = state => {
+const mapState = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart,
-    currentProduct: state.product.product
+    currentOrder: state.order.myCart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getUserOrderThunk: () => dispatch(getUserOrderThunk())
+    getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk())
   }
 }
 
-export default connect(mapPropToCart, mapDispatch)(Order)
-
-// class Order extends Component {
-//   constructor(props) {
-//     super(props)
-//   }
-//
-//   componentDidMount() {
-//     this.props.getUserOrderThunk()
-//   }
-//
-//   render() {
-//     console.log('ORDER CART, ', this.props.user, this.props.currentProduct)
-//     return (
-//       <div className="container">
-//         <h1>Hola</h1>
-//         <h3>{this.props.user.email}</h3>
-//         <h3>Your order: {this.props.currentProduct.name}</h3>
-//       </div>
-//     )
-//   }
-// }
-//
-// const mapPropToCart = state => {
-//   return {
-//     user: state.user,
-//     currentOrder: state.order.myCart,
-//     currentProduct: state.product.product
-//   }
-// }
-//
-// const mapDispatch = dispatch => {
-//   return {
-//     getUserOrderThunk: () => dispatch(getUserOrderThunk())
-//   }
-// }
-//
-//connect(mapPropToCart, mapDispatch)(Order)
+export default connect(mapState, mapDispatch)(Order)
