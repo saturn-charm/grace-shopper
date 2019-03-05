@@ -28,10 +28,6 @@ export const getUserOrderThunk = () => {
     try {
       const orderResponse = await axios.get('/api/orders/myCart')
       const existingOrder = orderResponse.data
-      console.log(
-        '!!!!!!!!!existingOrder at beginning of combo thunk',
-        existingOrder
-      )
       if (!existingOrder.guestCart || !existingOrder.itemsInOrder) {
         //if there is no guestcart on existingOrder, meaning we are either logged in or haven't initialized a cart
         const itemsInOrderResponse = await axios.get(
