@@ -86,4 +86,19 @@ router.post('/myCart/newItem', async (req, res, next) => {
   }
 })
 
+//api/itemsInOrder/:productId <- UPDATE
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId
+    const product = await ItemInOrder.findById(productId)
+    console.log(product)
+    const updated = await product.update({
+      numberOfItems: req.body.numberOfItems
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

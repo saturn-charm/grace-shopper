@@ -62,6 +62,20 @@ export const addItemToOrderThunk = (item, orderId, quantity) => {
   }
 }
 
+export const changeQuantity = (productId, numberOfItems) => {
+  return async dispatch => {
+    try {
+      const response = await axios.put(
+        `/api/orders/${productId}`,
+        numberOfItems
+      )
+      dispatch(getCartContents(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 // INITIAL STATE
 const initialState = {
   myCart: {},
