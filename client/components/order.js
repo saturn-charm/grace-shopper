@@ -16,13 +16,14 @@ class Order extends Component {
   handleCheckout() {}
   render() {
     const productName = this.props.currentOrder.products
-    
+    const itemsInCart = this.props.currentOrder.products
+
     let list
     const nameAndPrice =
       productName &&
       productName.map(product => {
         let quantity
-        this.props.itemsInCart.map(item => {
+        itemsInCart.map(item => {
           if (item.productId === product.id) {
             quantity = item.numberOfItems
           }
@@ -44,7 +45,7 @@ class Order extends Component {
             <p className="order">
               <br />
               <hr />
-              {product.name}, price: ${product.price},<br />
+              {product.name}, price per item: ${product.price},<br />
               Quantity: <br />
               <div className="input-field col s12 left">
                 <select className="browser-default order">{list}</select>
@@ -74,7 +75,8 @@ class Order extends Component {
 const mapState = state => {
   return {
     user: state.user,
-    currentOrder: state.order.myCart
+    currentOrder: state.order.myCart,
+    itemsInCart: state.order.itemsInOrder
   }
 }
 

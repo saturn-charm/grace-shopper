@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProductDetailsThunk, getUserOrderThunk} from '../store/product'
-import {addItemToOrderThunk} from '../store/order'
+import {getProductDetailsThunk} from '../store/product'
+import {addItemToOrderThunk, getUserOrderThunk} from '../store/order'
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -18,11 +18,17 @@ class ProductDetails extends Component {
     const productId = this.props.match.params.productId
 
     this.props.getProductDetailsThunkDispatch(productId)
+    this.props.getUserOrderThunkDispatch()
   }
   handleAddToCart() {
+    console.log(
+      "in handleaddtocart, here's this.state.value: ",
+      this.state.value
+    )
     this.props.addItemToOrderThunkDispatch(
       this.props.currentProduct,
-      this.props.currentOrder.id
+      this.props.currentOrder.id,
+      this.state.value
     )
 
     let addText
@@ -112,8 +118,8 @@ const mapDispatch = dispatch => {
 
     getUserOrderThunkDispatch: () => dispatch(getUserOrderThunk()),
 
-    addItemToOrderThunkDispatch: (item, orderId) =>
-      dispatch(addItemToOrderThunk(item, orderId))
+    addItemToOrderThunkDispatch: (item, orderId, quantity) =>
+      dispatch(addItemToOrderThunk(item, orderId, quantity))
   }
 }
 
