@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Product(props) {
+const Product = props => {
   const product = props.product
   return (
     <div className="container">
@@ -23,3 +23,5 @@ export default function Product(props) {
     </div>
   )
 }
+
+export default Product

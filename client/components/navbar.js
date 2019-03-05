@@ -9,24 +9,21 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <div className="nav-wraper">
         <div className="container">
-          <Link to="/orders" className="btn-floating z-depth-0 white right">
-            <i className="material-icons pink-text darken-1">
-              add_shopping_cart
-            </i>
-          </Link>
-          <Link to="/products" className="right">
-            All Mittens
-          </Link>
-          <ul className="hide-on-med-and-down">
-            <Link to="/aboutUs" className="brand-logo">
-              <i className="large material-icons"> pets </i>Mittens
+          <ul className="orders">
+            <Link to="/orders" className="btn-floating z-depth-0 white right">
+              <i className="material-icons pink-text darken-1">
+                add_shopping_cart
+              </i>
             </Link>
           </ul>
+          <Link to="/home" className="brand-logo">
+            <i className="large material-icons"> pets </i>Mittens
+          </Link>
           <div className="right">
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Link to="/home">Home</Link>
+                <Link to="/myaccount">My Account</Link>
                 <a href="#" onClick={handleClick}>
                   Logout
                 </a>
@@ -39,6 +36,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </div>
             )}
           </div>
+          <Link to="/products" className="right">
+            All Mittens
+          </Link>
+          <Link to="/home" className="right">
+            Home
+          </Link>
         </div>
       </div>
     </nav>
