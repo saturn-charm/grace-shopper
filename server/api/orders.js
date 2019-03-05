@@ -6,6 +6,7 @@ router.get('/', async (req, res, next) => {
   try {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
+        //what if a user has multiple un-purchased orders?
         where: {userId: req.session.passport.user},
         include: [{model: Product}]
       })
@@ -20,26 +21,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//api/orders/itemsInOrder/:orderId
-router.get('/itemsInOrder/:orderId', async (req, res, next) => {
+//api/orders/:orderId
+router.get('/:orderId', async (req, res, next) => {
   try {
+    //the point of this route is to get the quantity of items in an order
     const orderItems = await ItemInOrder.findAll({
+      //example: eager loading from above route tells you that you have
       where: {
-        orderId: req.params.orderId
-      }
-    })
-    res.json(orderItems)
-  } catch (error) {
-    next(error)
-  }
-})
-
-//api/orders/newItem
-router.post('/newItem', async (req, res, next) => {
-  try {
-    const orderItems = await ItemInOrder.findAll({
-      where: {
-        orderId: req.params.orderId
+        //dog sneakers in your cart, but not how many. this route returns ItemInOrder, which
+        orderId: req.params.orderId //includes quantity and historical price information
       }
     })
     res.json(orderItems)

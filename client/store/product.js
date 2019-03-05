@@ -10,9 +10,9 @@ const getProductsFromServer = products => ({
   products
 })
 
-const getProductDetails = productId => ({
+const getProductDetails = product => ({
   type: GET_PRODUCT_DETAILS,
-  productId
+  product
 })
 
 // THUNK CREATORS
@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
       return {...state, products: action.products}
     }
     case GET_PRODUCT_DETAILS: {
-      return {...state, product: action.productId}
+      return {...state, product: action.product}
     }
     default:
       return state
