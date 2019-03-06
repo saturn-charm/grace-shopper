@@ -1,20 +1,8 @@
 const router = require('express').Router()
 const {Order, ItemInOrder, Product} = require('../db/models')
 
-const makeError = (status, message) => {
-  const err = new Error(message)
-  err.status = status
-  return err
-}
-const isAdmin = (req, res, next) => {
-  // let isAdmin = req.user.admin ? true : false ;
-  let isAdmin = req.user ? req.user.admin : false
-  if (!isAdmin) return next(makeError(403, 'Forbidden'))
-  next()
-}
-
 //api/orders/myCart
-router.get('/myCart', isAdmin, async (req, res, next) => {
+router.get('/myCart', async (req, res, next) => {
   try {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
@@ -57,7 +45,7 @@ router.put('/myCart', async (req, res, next) => {
 })
 
 //api/orders/mycart/:orderId
-router.get('/myCart/:orderId', isAdmin, async (req, res, next) => {
+router.get('/myCart/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport) {
       //the point of this route is to get the quantity of items in an order
@@ -76,6 +64,7 @@ router.get('/myCart/:orderId', isAdmin, async (req, res, next) => {
 
 router.post('/myCart/newItem', async (req, res, next) => {
   try {
+    console.log('req.body: ', req.body)
     const newItemInOrder = {
       productId: req.body[0].id,
       orderId: req.body[1],
