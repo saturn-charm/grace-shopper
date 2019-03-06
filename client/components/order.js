@@ -12,7 +12,10 @@ export class Order extends Component {
     this.props.getUserOrderThunkDispatch()
   }
 
-  handleCheckout() {}
+  handleCheckout() {
+    this.props.history.push('/checkout')
+  }
+
   render() {
     const productName = this.props.currentOrder.products
 
