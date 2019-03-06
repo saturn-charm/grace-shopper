@@ -16,9 +16,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               </i>
             </Link>
           </ul>
-          <Link to="/home" className="brand-logo">
-            <i className="large material-icons"> pets </i>Mittens
-          </Link>
+          <ul className="hide-on-med-and-down">
+            <Link to="/home" className="brand-logo">
+              <i className="large material-icons"> pets </i>Mittens
+            </Link>
+          </ul>
           <div className="right">
             {isLoggedIn ? (
               <div>

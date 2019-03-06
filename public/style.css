@@ -118,6 +118,14 @@ button.waves-effect.pink.lighten-1.btn-large.product,
   margin-top: 10%;
 }
 
+button.waves-effect.blue.lighten-3.btn.update {
+  margin-right: 1%;
+}
+
+button.waves-effect.green.lighten-3.btn.update {
+  margin-left: 1%;
+}
+
 .waves-effect.purple.lighten-4.btn-large {
   margin-top: 8%;
 }

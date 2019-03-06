@@ -7,7 +7,7 @@ router.get('/myCart', async (req, res, next) => {
     if (req.session.passport) {
       const response = await Order.findOrCreate({
         //what if a user has multiple un-purchased orders?
-        where: {userId: req.session.passport.user},
+        where: {userId: req.session.passport.user, purchased: false},
         include: [{model: Product}]
       })
       res.json(response[0])
@@ -25,7 +25,26 @@ router.get('/myCart', async (req, res, next) => {
   }
 })
 
-//api/orders/:orderId
+//api/orders/myCart
+router.put('/myCart', async (req, res, next) => {
+  try {
+    await Order.update(
+      {
+        purchased: true
+      },
+      {
+        where: {id: req.body.id},
+        returning: true,
+        plain: true
+      }
+    )
+    res.send('Success')
+  } catch (error) {
+    next(error)
+  }
+})
+
+//api/orders/mycart/:orderId
 router.get('/myCart/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport) {
@@ -91,13 +110,26 @@ router.put('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
     const product = await ItemInOrder.findById(productId)
-    console.log(product)
+    // console.log(product)
     const updated = await product.update({
       numberOfItems: req.body.numberOfItems
     })
     res.json(updated)
   } catch (err) {
     next(err)
+  }
+})
+
+router.delete('/:orderId', (req, res, next) => {
+  try {
+    const del = Order.destroy({
+      where: {
+        orderId: req.params.campusId
+      }
+    })
+    res.status(200).json(del)
+  } catch (error) {
+    res.sendStatus(error)
   }
 })
 
