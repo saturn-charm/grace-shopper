@@ -64,7 +64,7 @@ router.get('/myCart/:orderId', async (req, res, next) => {
 
 router.post('/myCart/newItem', async (req, res, next) => {
   try {
-    console.log('req.body: ', req.body)
+    // console.log('req.body: ', req.body)
     const newItemInOrder = {
       productId: req.body[0].id,
       orderId: req.body[1],
@@ -81,6 +81,7 @@ router.post('/myCart/newItem', async (req, res, next) => {
       })
       if (!orderItem) {
         const newOrderItem = await ItemInOrder.create(newItemInOrder)
+
         res.json(newOrderItem)
       } else {
         res.json(orderItem)
@@ -103,6 +104,19 @@ router.post('/myCart/newItem', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+
+  //api/orders/purchased
+  router.get('/purchased', async (req, res, next) => {
+    try {
+      const order = await Order.findAll({
+        where: {purchased: true},
+        include: [{model: Product}]
+      })
+      res.send(order)
+    } catch (error) {
+      next(error)
+    }
+  })
 })
 
 module.exports = router

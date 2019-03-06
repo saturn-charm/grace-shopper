@@ -15,10 +15,11 @@ class Checkout extends Component {
   handlePurchase() {
     const order = this.props.userOrder
     this.props.puchaseOrderThunkDispatch(order)
+    this.props.history.push('/home')
   }
 
   render() {
-    console.log('PROPS', this.props)
+    // console.log('PROPS', this.props)
     const userProducts = this.props.userOrder.products
     const productList =
       userProducts &&
