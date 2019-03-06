@@ -10,7 +10,7 @@ export default class CheckoutConfirmation extends Component {
     return (
       <div>
         <div>Thank you, your order has been placed.</div>
-        <div>Thank you, your order has been placed.</div>
+        <div>Please check your email for confirmation.</div>
       </div>
     )
   }

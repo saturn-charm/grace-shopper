@@ -15,12 +15,12 @@ class Checkout extends Component {
   handlePurchase() {
     const order = this.props.userOrder
     this.props.puchaseOrderThunkDispatch(order)
-    this.props.history.push('/home')
+    this.props.history.push('/checkout-confirmation')
   }
 
   render() {
-    // console.log('PROPS', this.props)
     const userProducts = this.props.userOrder.products
+    // console.log('PROPS', priceTotal)
     const productList =
       userProducts &&
       userProducts.map(product => {
@@ -31,17 +31,26 @@ class Checkout extends Component {
         )
       })
 
+    let total = 0
+
     return (
       <div>
-        <h2>Review Items In Cart:</h2>
+        <h2>Order Summary</h2>
         {productList}
+
+        {userProducts &&
+          userProducts.forEach(product => {
+            total += product.price
+          })}
+
+        <div>Order Total: ${total} </div>
 
         <button
           type="button"
           className="waves-effect pink lighten-1 btn-large product"
           onClick={this.handlePurchase}
         >
-          Purchase
+          Place Your Order
         </button>
       </div>
     )
