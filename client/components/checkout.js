@@ -15,6 +15,7 @@ class Checkout extends Component {
   handlePurchase() {
     const order = this.props.userOrder
     this.props.puchaseOrderThunkDispatch(order)
+    this.props.history.push('/checkout-confirmation')
   }
 
   render() {
