@@ -44,6 +44,20 @@ router.put('/myCart', async (req, res, next) => {
   }
 })
 
+router.put('/myCart/:orderId', async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId
+    const product = await Order.findById(orderId)
+    console.log('-----------------------product.data: ', product.data)
+    const updated = await product.update({
+      numberOfItems: req.body.numberOfItems
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //api/orders/mycart/:orderId
 router.get('/myCart/:orderId', async (req, res, next) => {
   try {
