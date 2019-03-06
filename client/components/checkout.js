@@ -20,7 +20,7 @@ class Checkout extends Component {
 
   render() {
     const userProducts = this.props.userOrder.products
-    // console.log('PROPS', priceTotal)
+    console.log('PROPS', userProducts)
     const productList =
       userProducts &&
       userProducts.map(product => {
@@ -36,14 +36,26 @@ class Checkout extends Component {
     return (
       <div>
         <h2>Order Summary</h2>
-        {productList}
+        {/* {productList} */}
+
+        {userProducts &&
+          userProducts.map(product => {
+            return (
+              <div key={product.id}>
+                <h3>
+                  {product.name}:
+                  {product['item-in-order'].numberOfItems}
+                </h3>
+              </div>
+            )
+          })}
 
         {userProducts &&
           userProducts.forEach(product => {
             total += product.price
           })}
 
-        <div>Order Total: ${total} </div>
+        <h3>Order Total: ${total}</h3>
 
         <button
           type="button"
